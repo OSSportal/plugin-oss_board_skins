@@ -1,0 +1,66 @@
+{
+  "name": "xpressengine-plugin/oss_board_skins",
+  "description": "This Package is Xpressengine Plugin - OSS 게시판 스킨 모음.",
+  "keywords": [
+    "xpressengine",
+    "plugin"
+  ],
+  "license": "LGPL-2.1",
+  "version": "1.0.0",
+  "type": "xpressengine-plugin",
+  "support": {
+    "email": "input@your.email"
+  },
+  "authors": [
+    {
+      "name": "input your name",
+      "email": "input@your.email",
+      "homepage": "http://input.your.site",
+      "role": "Developer"
+    }
+  ],
+  "extra": {
+    "xpressengine": {
+      "title": "OSS 게시판 스킨 모음",
+      "component": {
+        "module/board@board/skin/oss_board_skins@calendar" : {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\Calendar\\CalendarSkin",
+          "name": "게시판 달력 스킨",
+          "description": "게시판 달력 스킨 (행사 안내 게시판)",
+          "screenshot": []
+        },
+        "module/board@board/skin/oss_board_skins@private_qna" : {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\PrivateQnA\\PrivateQnASkin",
+          "name": "1:1 묻고 답하기 스킨",
+          "description": "게시판 1:1 묻고 답하기 스킨",
+          "screenshot": []
+        },
+        "module/board@board/skin/oss_board_skins@category_tab" : {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\CategoryTab\\CategoryTabSkin",
+          "name": "테크뷰 기술팁 스킨",
+          "description": "게시물 상단에 카테고리를 탭 형식으로 표현",
+          "screenshot": []
+        },
+        "module/board@board/skin/oss_board_skins@faq" : {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\FAQ\\FAQSkin",
+          "name": "FAQ 스킨",
+          "description": "게시판 FAQ 스킨",
+          "screenshot": []
+        },
+        "module/board@board/skin/oss_board_skins@oss" : {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\OSS\\OSSSkin",
+          "name": "OSS 스킨",
+          "description": "게시판 OSS 스킨",
+          "screenshot": []
+        }
+      }
+    }
+  },
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\": "components/"
+    }
+  }
+}
