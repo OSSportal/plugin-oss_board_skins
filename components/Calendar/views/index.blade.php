@@ -16,6 +16,7 @@
 width:inherit !important;
 }
 
+.ui-datepicker-calendar {display:none;}
 
 .e_calendar{width:100%; border:1px solid #e1e5e8; border-collapse:collapse; box-sizing:content-box; text-align:center;}
 .e_calendar th,td{width:calc(100%/7); border:1px solid #e1e5e8; border-collapse:collapse; box-sizing:content-box; padding:10px 0;}
@@ -83,10 +84,18 @@ width:inherit !important;
     <script>
         $(function () {
             var options = {
-                dateFormat: 'yy-mm-dd',
+	changeMonth: true,
+	changeYear: true,
+	showButtonPanel: true,
+	dateFormat: 'yy-mm',
+defaultDate: new Date({{substr($calendarMonth, 0, 4)}}, {{(int)substr($calendarMonth, 5, 2)}}, 1),
                 onSelect: function (dateText) {
                     $('.filter').submit();
-                }
+                },
+onClose: function(dateText, inst) { 
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+                    $('.filter').submit();
+        }
             };
 
             $('input[name="calendar_month"]').datepicker(options);
