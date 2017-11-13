@@ -55,7 +55,7 @@
 .board textarea,
 .board select {
   font-size: 13px;
-  font-family: "Nanum Barun Gothic","나눔고딕",NanumGothic,"돋움",Dotum,Helvetica Neue,Helvetica,sans-serif;
+  font-family:"Noto Sans KR", "Nanum Gothic", "나눔 고딕", "Malgun Gothic", "맑은 고딕", Dotum, "돋움", Gullim, "굴림", "helvetica neue", Tahoma, "Microsoft Sans Serif", sans-serif;
   color: #6a6e79;
 }
 .board select {
@@ -63,7 +63,7 @@
 }
 .board label {
   display: table-cell;
-  width: 100px;
+  width: 120px;
   margin: 0;
   font-weight: normal;
 }
@@ -549,7 +549,7 @@
 .board_list td.title{letter-spacing:-1px; text-align:left;}
 
 .board_list td.title .title_text{
-  margin-right: 5px; display:inline-block; max-width: 370px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  margin-right: 5px; display:inline-block; max-width: 350px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 
 .board_list td.title .title_text:visited,
 .board_list.v2 .title:visited{
@@ -1849,3 +1849,13 @@ div.ReactTags__suggestions li:hover span,
 div.ReactTags__suggestions li.active span {
   color: #fff;
 }
+
+.xe-form-group .xe-dynamicField {
+border:1px solid #444;
+}
+
+.bd_more_area .xe-dropdown-menu {
+left:auto;
+right:0;
+}
+

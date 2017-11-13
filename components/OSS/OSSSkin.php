@@ -26,7 +26,7 @@ class OSSSkin extends CommonSkin
      */
     public function render()
     {
-        if (!in_array($this->view, ['index', 'show'])) {
+        if (!in_array($this->view, ['index', 'show', 'create', 'edit'])) {
             return parent::render();
         }
 
@@ -47,12 +47,13 @@ class OSSSkin extends CommonSkin
         $this->data['_skinPath'] = static::$path;
         $this->data['isManager'] = $this->isManager();
 
+if (isset($this->data['paginate'])) {
         $total = $this->data['paginate']->total();
         $currentPage = \Request::get('page', 1);
         $perPage = $this->data['config']->get('perPage');
         $startCount = $total - (($currentPage-1) * $perPage);
         $this->data['_startCount'] = $startCount;
-
+}
         /**
          * If view file is not 'index.blade.php' then change view path to CommonSkin's path.
          * CommonSkin extends by other Skins. Extended Skin can make just 'index.blade.php'

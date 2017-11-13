@@ -10,6 +10,15 @@
     .oss-board_list th .check{width: 20px;}
     .oss-board_list td .check{width: 20px;}
 </style>
+@if(in_array(Request::segment(1), ['kosslab_project', 'dev_competition_activities', 'dev_support_activities']))
+<style>
+.board_list td.title .title_text{
+  margin-right: 5px; display:inline-block; max-width: 450px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+</style>
+@else
+
+@endif
+
 <div class="bd_oss">
 <div class="board_header">
     @if ($isManager === true)

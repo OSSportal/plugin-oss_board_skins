@@ -24,6 +24,7 @@ width:inherit !important;
 .e_calendar .e_date td{font-weight:bold;}
 .e_calendar .e_date td span{display:block; font-weight:normal;}
 .e_calendar .e_date .sun{color:#f2412c;}
+.e_calendar .e_date .sun span{color:#f2412c;}
 
 .e_calendar .e_txt td{position:relative; height:110px;}
 .e_calendar .e_txt div{position:absolute; top:12px; z-index:15;}
@@ -31,12 +32,18 @@ width:inherit !important;
 .e_calendar .e_txt a{font-size:13px; line-height:18px; font-weight:bold;}
 
 .e_calendar .day_1{width:100%;}
-.e_calendar .day_2{width:201%;}
+.e_calendar .day_2{width:191%;}
 .e_calendar .day_3{width:302%;}
 .e_calendar .day_4{width:403%;}
 .e_calendar .day_5{width:504%;}
 .e_calendar .day_6{width:605%;}
 .e_calendar .day_7{width:706%;}
+
+.not_now_day {
+-ms-filter:'progid:DXImageTransform.Microsoft.Alpah(Opacity=30)'; /*IE8 */
+filter:alpha(opactiy=30); /* IE5~7, 8~9 */
+opacity:0.3;
+}
 </style>
 
 
@@ -50,10 +57,21 @@ width:inherit !important;
 
     <table class="e_calendar">
         @foreach ($calendar as $line => $dates)
+          @if($line == 0)
+            <tr class="e_week">
+              @foreach ($dates as $date)
+              <td @if(date('w', $date['time']) == 0) class="sun" @endif ><span>{{date('D', $date['time'])}}</span></td>
+              @endforeach
+            </tr>
+            @endif 
             <tr class="e_date">
                 @foreach ($dates as $date)
-                    <td @if(date('w', $date['time']) == 0) class="sun" @endif>
-                        {{$date['date']}} <span>{{date('D', $date['time'])}}</span>
+                    <td @if(date('w', $date['time']) == 0) class="sun" @endif style="text-align:left;padding-left:10px;">
+		@if(substr($date['date'], 5, 2) == substr($calendarMonth, 5))
+                        {{substr($date['date'], 8)}} 
+@else
+                        <span class="not_now_day">{{substr($date['date'], 8)}} </span>
+@endif
                     </td>
                 @endforeach
             </tr>
