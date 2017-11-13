@@ -1,13 +1,14 @@
 {{ XeFrontend::css('assets/vendor/jqueryui/jquery-ui.min.css')->load() }}
 {{ XeFrontend::js('assets/vendor/jqueryui/jquery-ui.min.js')->appendTo('head')->load() }}
 <div class="event_cbtn">
+
+@if ($createPermission)
+<a href="{{ $urlHandler->get('create') }}"><span >{{ xe_trans('board::newPost') }}</span><i class="xi-pen-o"></i></a>
+@endif
   <a href="/event" class="view_calendar">달력</a>
   <a href="/event?listStyle=list" class="view_list">리스트</a>
 </div>
 
-@if ($createPermission)
-<a href="{{ $urlHandler->get('create') }}"><span class="xe-sr-only">{{ xe_trans('board::newPost') }}</span><i class="xi-pen-o"></i></a>
-@endif
 
 
 @if ($listStyle == 'calendar')
