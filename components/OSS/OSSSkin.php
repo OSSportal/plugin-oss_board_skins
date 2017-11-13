@@ -10,6 +10,8 @@ use XeFrontend;
 use Xpressengine\Presenter\Presenter;
 use XePresenter;
 use View;
+use Xpressengine\Plugins\Board\BoardPermissionHandler;
+use Xpressengine\Permission\Instance;
 
 class OSSSkin extends CommonSkin
 {
@@ -54,6 +56,13 @@ if (isset($this->data['paginate'])) {
         $startCount = $total - (($currentPage-1) * $perPage);
         $this->data['_startCount'] = $startCount;
 }
+
+        $boardPermission = app('Xpressengine\Plugins\Board\BoardPermissionHandler');
+        $this->data['createPermission'] = Gate::allows(
+            BoardPermissionHandler::ACTION_CREATE,
+            new Instance($boardPermission->name($this->data['instanceId']))
+        );
+
         /**
          * If view file is not 'index.blade.php' then change view path to CommonSkin's path.
          * CommonSkin extends by other Skins. Extended Skin can make just 'index.blade.php'
