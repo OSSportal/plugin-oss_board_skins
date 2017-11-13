@@ -51,6 +51,9 @@ class PrivateQnASkin extends OSSSkin
             'oss_board_skin::private_qna.set_skin_target_id',
             function ($func, $skinTargetId) {
                 $func($skinTargetId);
+                if (!$skinTargetId) {
+                    return;
+                }
 
                 $request = app('request');
                 $instanceConfig = InstanceConfig::instance();

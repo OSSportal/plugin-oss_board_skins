@@ -38,7 +38,7 @@
         <div class="bd_btn_area">
             <ul>
                 <!-- [D] 클릭시 클래스 on 및 추가 bd_search_area 영역 활성화 -->
-                <li><a href="#" class="bd_search __xe-bd-search"><span class="xe-sr-only">{{ xe_trans('xe::search') }}</span><i class="xi-search"></i></a></li>
+                <!--<li><a href="#" class="bd_search __xe-bd-search"><span class="xe-sr-only">{{ xe_trans('xe::search') }}</span><i class="xi-search"></i></a></li>-->
 		@if($createPermission == true)
                 <li><a href="{{ $urlHandler->get('create') }}"><span class="xe-sr-only">{{ xe_trans('board::newPost') }}</span><i class="xi-pen-o"></i></a></li>
 		@endif
@@ -453,5 +453,15 @@
             <!-- /PAGINATION Mobile -->
 </div>
 <div class="bd_dimmed"></div>
+
+<div class="bd_search_area_bottom">
+                <form method="get" class="__xe_simple_search" action="{{ $urlHandler->get('index') }}">
+                    <div class="bd_search_box">
+                        <input type="text" name="title_pure_content" class="bd_search_input" title="{{ xe_trans('board::boardSearch') }}" placeholder="{{ xe_trans('xe::enterKeyword') }}" value="{{ Request::get('title_pure_content') }}">
+                        <!-- [D] 클릭시 클래스 on 및 추가 bd_search_detail 영역 활성화 -->
+			<button typoe="submit" class="oss_search_btn">검색</button>
+                    </div>
+                </form>
+</div>
 
 </div>
