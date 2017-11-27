@@ -68,9 +68,14 @@ if (isset($this->data['paginate'])) {
          * CommonSkin extends by other Skins. Extended Skin can make just 'index.blade.php'
          * and other blade files will use to CommonSkin's blade files.
          */
+	if (View::exists(sprintf('%s/views/%s', static::$path, $this->view)) == false) {
+            static::$path = self::$path;
+	}
+/*
         if ($this->view != 'index') {
             static::$path = self::$path;
         }
+*/
         $contentView = $this->render2();
 
         /**

@@ -1,6 +1,6 @@
 {{ XeFrontend::rule('board', $rules) }}
 
-{{-- XeFrontend::js('plugins/board/assets/js/build/BoardTags.js')->appendTo('body')->load() --}}
+{{ XeFrontend::js('plugins/board/assets/js/build/BoardTags.js')->appendTo('body')->load() }}
 
 <div class="board_write">
     <form method="post" id="board_form" class="__board_form" action="{{ $urlHandler->get('update') }}" enctype="multipart/form-data" data-rule="board" data-rule-alert-type="toast" data-instance_id="{{$item->instance_id}}" data-url-preview="{{ $urlHandler->get('preview') }}">
@@ -29,8 +29,16 @@
                 </div>
 
 		<div class="__xe_dynamicfield_group">
+@foreach ($skinConfig['formColumns'] as $columnName)
+@if(isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
+                <div class="__xe_{{$columnName}} __xe_section">
+                    {!! df_edit($config->get('documentGroup'), $columnName, $item->getAttributes()) !!}
+                </div>
+                @endif
+@endforeach
+
             @foreach ($fieldTypes as $dynamicFieldConfig)
-                @if (($fieldType = XeDynamicField::getByConfig($dynamicFieldConfig)) != null && $dynamicFieldConfig->get('use') == true)
+                @if (in_array($dynamicFieldConfig->get('id'), $skinConfig['formColumns']) === false && ($fieldType = XeDynamicField::getByConfig($dynamicFieldConfig)) != null && $dynamicFieldConfig->get('use') == true)
                     <div class="__xe_{{$dynamicFieldConfig->get('id')}} __xe_section">
                         {!! $fieldType->getSkin()->edit($item->getAttributes()) !!}
                     </div>
@@ -45,6 +53,12 @@
                           'content' => Request::old('content', $item->content),
                         ], $item->id) !!}
                     </div>
+
+@if($config->get('useTag') === true)
+                    {!! uio('uiobject/board@tag', [
+                    'tags' => $item->tags->toArray()
+                    ]) !!}
+                @endif
                 </div>
 
         <div class="write_footer">

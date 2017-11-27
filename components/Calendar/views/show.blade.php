@@ -30,6 +30,12 @@
                     </div>
                 </div>
 
+                <div class="read_body">
+                    <div class="xe_content">
+                        {!! compile($item->instance_id, $item->content, $item->format === Xpressengine\Plugins\Board\Models\Board::FORMAT_HTML) !!}
+                    </div>
+                </div>
+
 		<div class="__xe_dynamicfield_group">
 @foreach ($skinConfig['formColumns'] as $columnName)
 @if (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null && isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
@@ -47,12 +53,6 @@
             @endif
         @endforeach
 		</div>
-
-                <div class="read_body">
-                    <div class="xe_content">
-                        {!! compile($item->instance_id, $item->content, $item->format === Xpressengine\Plugins\Board\Models\Board::FORMAT_HTML) !!}
-                    </div>
-                </div>
 
         <div class="read_footer">
             @if (count($item->files) > 0)

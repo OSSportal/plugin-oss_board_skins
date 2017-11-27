@@ -10,7 +10,17 @@
     .oss-board_list th .check{width: 20px;}
     .oss-board_list td .check{width: 20px;}
 </style>
-@if(in_array(Request::segment(1), ['kosslab_project', 'dev_competition_activities', 'dev_support_activities']))
+@if(in_array(Request::segment(1), ['dev_support_activities']))
+<style>
+.board_list td.title .title_text{
+  margin-right: 5px; display:inline-block; max-width: 380px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+</style>
+@elseif(in_array(Request::segment(1), ['kosslab_project', 'dev_competition_activities', 'dev_support_activities']))
+<style>
+.board_list td.title .title_text{
+  margin-right: 5px; display:inline-block; max-width: 400px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+</style>
+@elseif(in_array(Request::segment(1), ['oss_case',]))
 <style>
 .board_list td.title .title_text{
   margin-right: 5px; display:inline-block; max-width: 450px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
@@ -307,7 +317,7 @@
                             @endif
                             <a href="{{$urlHandler->getShow($item, Request::all())}}" id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
                             @if($item->comment_count > 0)
-                                <a href="#" class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
+                                <a href="{{$urlHandler->getShow($item, Request::all())}}#comment" class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
                             @endif
                             @if ($item->data->file_count > 0)
                                 <span class="bd_ico_file"><i class="xi-paperclip"></i><span class="xe-sr-only">file</span></span>
@@ -393,7 +403,7 @@
                                 @endif
                                 <a href="{{$urlHandler->getShow($item, Request::all())}}" id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
                                 @if($item->comment_count > 0)
-                                    <a href="#" class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
+                                    <a href="{{$urlHandler->getShow($item, Request::all())}}#comment" class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
                                 @endif
                                 @if ($item->data->file_count > 0)
                                     <span class="bd_ico_file"><i class="xi-paperclip"></i><span class="xe-sr-only">file</span></span>

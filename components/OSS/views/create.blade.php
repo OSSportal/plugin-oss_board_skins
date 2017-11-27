@@ -30,8 +30,15 @@
                 </div>
 
 		<div class="__xe_dynamicfield_group">
+@foreach ($skinConfig['formColumns'] as $columnName)
+		@if(isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
+                <div class="__xe_{{$columnName}} __xe_section">
+			{!! df_create($config->get('documentGroup'), $columnName, Request::all()) !!}
+                </div>
+		@endif
+@endforeach
         @foreach ($fieldTypes as $dynamicFieldConfig)
-            @if (($fieldType = XeDynamicField::getByConfig($dynamicFieldConfig)) != null && $dynamicFieldConfig->get('use') == true)
+            @if (in_array($dynamicFieldConfig->get('id'), $skinConfig['formColumns']) === false && ($fieldType = XeDynamicField::getByConfig($dynamicFieldConfig)) != null && $dynamicFieldConfig->get('use') == true)
                 <div class="__xe_{{$dynamicFieldConfig->get('id')}} __xe_section">
                     {!! df_create($dynamicFieldConfig->get('group'), $dynamicFieldConfig->get('id'), Request::all()) !!}
                 </div>
@@ -46,6 +53,9 @@
                           'content' => Request::old('content'),
                         ]) !!}
                     </div>
+@if($config->get('useTag') === true)
+                    {!! uio('uiobject/board@tag') !!}
+                @endif
                 </div>
 
 
