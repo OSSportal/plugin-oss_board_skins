@@ -11,7 +11,9 @@ use Xpressengine\Presenter\Presenter;
 use XePresenter;
 use View;
 use Xpressengine\Plugins\Board\BoardPermissionHandler;
+use Xpressengine\Plugins\Board\Handler as BoardHandler;
 use Xpressengine\Permission\Instance;
+use Xpressengine\Routing\InstanceConfig;
 
 class OSSSkin extends CommonSkin
 {
@@ -19,6 +21,7 @@ class OSSSkin extends CommonSkin
 
     public static function boot()
     {
+	static::interceptSetSkinTargetId();
     }
 
     /**
@@ -118,4 +121,61 @@ if (isset($this->data['paginate'])) {
         }
     }
 
+    /**
+     * skin 설정할 때 thumbnail table 을 join 할 수 있도록 intercept 등록
+     *
+     * @return void
+     */
+    protected static function interceptSetSkinTargetId()
+    {
+        intercept(
+            sprintf('%s@setSkinTargetId', Presenter::class),
+            static::class.'-set_skin_target_id',
+            function ($func, $skinTargetId) {
+                $func($skinTargetId);
+                if (!$skinTargetId) {
+                    return;
+                }
+
+                $request = app('request');
+                $instanceConfig = InstanceConfig::instance();
+
+                if ($request instanceof Request) {
+                    $isMobile = $request->isMobile();
+                } else {
+                    $isMobile = false;
+                }
+                $assignedSkin = XeSkin::getAssigned(
+                    [$skinTargetId, $instanceConfig->getInstanceId()],
+                    $isMobile ? 'mobile' : 'desktop'
+                );
+
+                // target 의 스킨이 현재 skin 의 아이디와 일치하는지 확인
+                if (in_array($instanceConfig->getUrl(), ['dev_support_activities', 'dev_competition_activities', 'kosslab_project']) && $assignedSkin->getId() == static::getId()) {
+			// check instance
+			intercept(
+			    sprintf('%s@getOrders', BoardHandler::class),
+			    static::class.'-board-getOrders',
+			    function ($func) {
+				$orders = $func();
+				$orders[] = ['value' => 'datahub_year', 'text' => '연도순'];
+				return $orders;
+			    }
+			);
+
+			intercept(
+			    sprintf('%s@makeOrder', BoardHandler::class),
+			    static::class.'-board-makeOrder',
+			    function ($func, $query, $request, $config) {
+				$query = $func($query, $request, $config);
+				if ($request->get('order_type') == 'datahub_year') {
+					$query->orderBy('datahub_year', 'desc')->orderBy('head', 'desc');
+				}
+				return $query;
+			    }
+			);
+                }
+            }
+        );
+    }
 }
