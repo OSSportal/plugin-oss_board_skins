@@ -951,7 +951,7 @@
 /* Read */
 .read_header h1 {
   margin-bottom: 19px;
-  font-size: 30px;
+  font-size: 20px;
   color: #696e7a;
   line-height: 130%;
 }
@@ -962,7 +962,7 @@
   display: inline-block;
   margin-bottom: 12px;
   vertical-align: top;
-  font-size: 20px;
+  font-size: 18px;
   color: #399cf7;
 }
 .read_header .more_info {

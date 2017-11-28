@@ -465,9 +465,15 @@
 <div class="bd_dimmed"></div>
 
 <div class="bd_search_area_bottom">
-                <form method="get" class="__xe_simple_search" action="{{ $urlHandler->get('index') }}">
+                <form method="get" action="{{ $urlHandler->get('index') }}">
                     <div class="bd_search_box">
-                        <input type="text" name="title_pure_content" class="bd_search_input" title="{{ xe_trans('board::boardSearch') }}" placeholder="{{ xe_trans('xe::enterKeyword') }}" value="{{ Request::get('title_pure_content') }}">
+			<select name="search_target">
+<option value="title" @if(Request::get('search_target') == 'title') selected="selected" @endif >제목</option>
+<option value="pure_content" @if(Request::get('search_target') == 'pure_content') selected="selected" @endif >내용</option>
+<option value="title_pure_content" @if(Request::get('search_target') == 'title_pure_content') selected="selected" @endif >제목 + 내용</option>
+<option value="writer" @if(Request::get('search_target') == 'writer') selected="selected" @endif >작성자</option>
+</select>
+                        <input type="text" name="search_keyword" class="bd_search_input" title="{{ xe_trans('board::boardSearch') }}" placeholder="{{ xe_trans('xe::enterKeyword') }}" value="{{ Request::get('search_keyword') }}">
                         <!-- [D] 클릭시 클래스 on 및 추가 bd_search_detail 영역 활성화 -->
 			<button typoe="submit" class="oss_search_btn">검색</button>
                     </div>

@@ -175,6 +175,32 @@ if (isset($this->data['paginate'])) {
 			    }
 			);
                 }
+
+			intercept(
+			    sprintf('%s@makeWhere', BoardHandler::class),
+			    static::class.'-board-makeWhere',
+			    function ($func, $query, $request, $config) {
+				$query = $func($query, $request, $config);
+
+if ($request->get('search_target') == 'title') {
+$query = $query->where('title', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+}
+if ($request->get('search_target') == 'pure_content') {
+$query = $query->where('pure_content', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+}
+if ($request->get('search_target') == 'title_pure_content') {
+$query = $query->whereNested(function ($query) use ($request) {
+$query->where('title', 'like', sprintf('%%%s%%', $request->get('search_keyword')))
+->orWhere('pure_content', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+});
+}
+if ($request->get('search_target') == 'writer') {
+$query = $query->where('writer', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+}
+				return $query;
+			    }
+			);
+
             }
         );
     }
