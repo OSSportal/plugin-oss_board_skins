@@ -83,15 +83,15 @@ opacity:0.3;
                             @foreach ($item as $data)
 @if($data['dot'] == 0)
                         <div class="clr day_{{$data['gage']}}" style="top: 12px; ">
-                            <p class="" style="background:{{$data['item']->seminar_mark_color ? $data['item']->seminar_mark_color : '#eee'}};"><a href="{{$urlHandler->getShow($data['item'], Request::all())}}">{{$data['item']->title}}</a></p>
+                            <p class="" style="background:{{$data['item']->seminar_mark_color ? $data['item']->seminar_mark_color : '#eee'}};"><a href="{{$urlHandler->getShow($data['item'], Request::all())}}" title="{{$data['item']->title}}">{{$data['item']->title}}</a></p>
                         </div>
 @elseif($data['dot'] == 1)
                         <div class="clr day_{{$data['gage']}}" style="top: 41px;">
-                            <p class="" style="background:{{$data['item']->seminar_mark_color ? $data['item']->seminar_mark_color : '#eee'}};"><a href="{{$urlHandler->getShow($data['item'], Request::all())}}">{{$data['item']->title}}</a></p>
+                            <p class="" style="background:{{$data['item']->seminar_mark_color ? $data['item']->seminar_mark_color : '#eee'}};"><a href="{{$urlHandler->getShow($data['item'], Request::all())}}" title="{{$data['item']->title}}">{{$data['item']->title}}</a></p>
                         </div>
 @elseif($data['dot'] == 2)
                         <div class="clr day_{{$data['gage']}}" style="top: 70px;">
-                            <p class="" style="background:{{$data['item']->seminar_mark_color ? $data['item']->seminar_mark_color : '#eee'}};"><a href="{{$urlHandler->getShow($data['item'], Request::all())}}">{{$data['item']->title}}</a></p>
+                            <p class="" style="background:{{$data['item']->seminar_mark_color ? $data['item']->seminar_mark_color : '#eee'}};"><a href="{{$urlHandler->getShow($data['item'], Request::all())}}" title="{{$data['item']->title}}">{{$data['item']->title}}</a></p>
                         </div>
 @endif
                             @endforeach

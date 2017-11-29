@@ -1859,3 +1859,7 @@ left:auto;
 right:0;
 }
 
+#xe-editor-content td,
+.cke_editable td {
+  padding: 4px 4px;
+}
