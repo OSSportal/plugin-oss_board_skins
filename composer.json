@@ -52,6 +52,12 @@
           "name": "OSS 스킨",
           "description": "게시판 OSS 스킨",
           "screenshot": []
+        },
+        "module/board@board/skin/oss_board_skins@oss_no_df" : {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\OSSNoDF\\OSSNoDFSkin",
+          "name": "OSS 스킨(no DF)",
+          "description": "게시판 OSS 스킨 (보기 페이지 DF 비노출)",
+          "screenshot": []
         }
       }
     }
