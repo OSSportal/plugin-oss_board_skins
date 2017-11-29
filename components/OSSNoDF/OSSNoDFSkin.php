@@ -9,9 +9,15 @@ use Gate;
 
 class OSSNoDFSkin extends OSSSkin
 {
-    protected static $path = 'oss_board_skins/components/OSSNoDFSkin';
+    protected static $path = 'oss_board_skins/components/OSSNoDF';
 
     public static function boot()
     {
+    }
+
+    public function render()
+    {
+        $this->data['_parentSkinPath'] = parent::$path;
+        return parent::render();
     }
 }
