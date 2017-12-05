@@ -48,6 +48,9 @@ class OSSSkin extends CommonSkin
             'board::msgDeleteConfirm',
         ]);
 
+	// kakaotalk api key for share 
+	$this->data['kakaotalk_api_key'] = app('config')->get('xe.kakaotalk_api');
+
         // set skin path
         $this->data['_skinPath'] = static::$path;
         $this->data['isManager'] = $this->isManager();

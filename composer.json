@@ -58,6 +58,11 @@
           "name": "OSS 스킨(no DF)",
           "description": "게시판 OSS 스킨 (보기 페이지 DF 비노출)",
           "screenshot": []
+        },
+        "uiobject/board@share/toggleMenu/oss_board_skins@kakaotalk": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\OSS\\KakaotalkShareItem",
+          "name": "Kakaotalk share toggle menu",
+          "description": ""
         }
       }
     }

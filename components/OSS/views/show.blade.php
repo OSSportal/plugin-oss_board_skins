@@ -5,6 +5,25 @@
 {{ XeFrontend::js('/assets/vendor/slickgrid/slick.dataview.js')->appendTo('head')->load() }}
 {{ XeFrontend::css('/assets/vendor/slickgrid/slick.grid.css')->load() }}
 
+@if ($kakaotalk_api_key)
+{{ XeFrontend::js('//developers.kakao.com/sdk/js/kakao.min.js')->appendTo('body')->load()}}
+{{ XeFrontend::html('oss:board_kakaotalk_script')->content("
+<script type='text/javascript'>
+$(function() {
+	Kakao.init('$kakaotalk_api_key');
+	$('body').bind('click', function (e) {
+		if($(e.target).hasClass('share-item-kakaotalk')) {
+			e.preventDefault();
+			Kakao.Link.sendScrap({
+requestUrl:'".$urlHandler->getShow($item)."'
+});
+		}
+	});
+});
+</script>
+")->load() }}
+@endif
+
     <div class="board_read">
                 <div class="read_header">
                     @if($item->status == $item::STATUS_NOTICE)
@@ -29,6 +48,14 @@
                         <span class="mb_readnum"><i class="xi-eye"></i> {{$item->read_count}}</span>
                     </div>
                 </div>
+{{-- url에 따라 content 출력 위치 변경 --}}
+@if(in_array(Request::segment(1), ['oss_guide', 'info_techtip', 'info_solution', 'info_test', 'info_install']))
+                <div class="read_body">
+                    <div class="xe_content">
+                        {!! compile($item->instance_id, $item->content, $item->format === Xpressengine\Plugins\Board\Models\Board::FORMAT_HTML) !!}
+                    </div>
+                </div>
+@endif
 
 		<div class="__xe_dynamicfield_group">
 @foreach ($skinConfig['formColumns'] as $columnName)
@@ -48,11 +75,14 @@
         @endforeach
 		</div>
 
+{{-- instance_id 따라 content 출력 위치 변경 --}}
+@if(false == in_array(Request::segment(1), ['oss_guide', 'info_techtip', 'info_solution', 'info_test', 'info_install']))
                 <div class="read_body">
                     <div class="xe_content">
                         {!! compile($item->instance_id, $item->content, $item->format === Xpressengine\Plugins\Board\Models\Board::FORMAT_HTML) !!}
                     </div>
                 </div>
+@endif
 
         <div class="read_footer">
             @if (count($item->files) > 0)
