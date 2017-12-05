@@ -51,6 +51,8 @@
                 <!--<li><a href="#" class="bd_search __xe-bd-search"><span class="xe-sr-only">{{ xe_trans('xe::search') }}</span><i class="xi-search"></i></a></li>-->
 		@if($createPermission == true)
                 <li><a href="{{ $urlHandler->get('create') }}"><span class="xe-sr-only">{{ xe_trans('board::newPost') }}</span><i class="xi-pen-o"></i></a></li>
+		@elseif($createPermission == false && in_array(Request::segment(1), ['oss_license_qna', 'qna']))
+                <li><a href="{{ $urlHandler->get('create') }}"><span class="xe-sr-only">{{ xe_trans('board::newPost') }}</span><i class="xi-pen-o"></i></a></li>
 		@endif
                 @if ($isManager === true)
                     <li><a href="{{ $urlHandler->managerUrl('config', ['boardId'=>$instanceId]) }}" target="_blank"><span class="xe-sr-only">{{ xe_trans('xe::manage') }}</span><i class="xi-cog"></i></a></li>
@@ -325,12 +327,13 @@
                             @if($item->isNew($config->get('newTime')))
                                 <span class="bd_ico_new"><i class="xi-new"></i><span class="xe-sr-only">new</span></span>
                             @endif
+			{{--
                             <div class="more_info xe-visible-xs">
+                                @if ($item->hasAuthor())
                                 <a href="#" class="mb_author"
                                    data-toggle="xe-page-toggle-menu"
                                    data-url="{{ route('toggleMenuPage') }}"
                                    data-data='{!! json_encode(['id'=>$item->getUserId(), 'type'=>'user']) !!}'>{!! $item->writer !!}</a>
-                                @if ($item->hasAuthor())
                                 @else
                                     <a class="mb_author">{!! $item->writer !!}</a>
                                 @endif
@@ -338,6 +341,7 @@
                                 <span class="mb_readnum"><i class="xi-eye"></i> {{ $item->read_count }}</span>
                                 <a href="#" class="mb_reply_num"><i class="xi-comment"></i> {{ $item->comment_count }}</a>
                             </div>
+			--}}
                         </td>
                     @elseif ($columnName == 'writer')
                         <td class="author xe-hidden-xs">
@@ -411,6 +415,7 @@
                                 @if($item->isNew($config->get('newTime')))
                                     <span class="bd_ico_new"><i class="xi-new"></i><span class="xe-sr-only">new</span></span>
                                 @endif
+{{--
                                 <div class="more_info xe-visible-xs">
                                     @if ($item->hasAuthor())
                                         <a href="#" class="mb_author"
@@ -424,6 +429,7 @@
                                     <span class="mb_readnum"><i class="xi-eye"></i> {{ $item->read_count }}</span>
                                     <a href="#" class="mb_reply_num"><i class="xi-comment"></i> {{ $item->comment_count }}</a>
                                 </div>
+--}}
                             </td>
                         @elseif ($columnName == 'writer')
                             <td class="author xe-hidden-xs">

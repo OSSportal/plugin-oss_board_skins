@@ -865,6 +865,7 @@
 
 /* Pagination */
 .bd_paginate {
+	width:100%;
   margin-top: 70px;
   text-align: center;
 }
@@ -873,7 +874,7 @@
 .bd_paginate > span {
   display: inline-block;
   margin: 0 3px;
-  padding: 6px 12px;
+  padding: 6px 8px;
   border-radius: 25px;
   color: #696e7a;
   text-align: center;
@@ -894,10 +895,10 @@
   -webkit-transition: all .2s ease-in-out;
 }
 .bd_paginate > .btn_prev {
-  margin: 0 23px 0 3px;
+  margin: 0 0 0 3px;
 }
 .bd_paginate > .btn_next {
-  margin: 0 3px 0 23px;
+  margin: 0 3px 0 0;
 }
 .bd_paginate > .btn_pg:hover {
   background: none;
@@ -1358,6 +1359,7 @@
   }
   .board_header {
     position: relative;
+		height:40px;
     z-index: 20;
     margin-bottom: 0;
     background-color: transparent;
@@ -1369,7 +1371,7 @@
   .board_header .bd_manage_area .btn_mng {
     padding: 0 11px;
     width: 42px;
-    height: 60px;
+    height: 40px;
   }
   .board_header .bd_manage_area .btn_mng i {
     /* line-height: 60px; */
@@ -1500,7 +1502,7 @@
     margin-top: 7px;
   }
   .board_list td {
-    padding: 12px 12px 11px;
+    padding: 9px 12px 2px 0;
     border-bottom: 1px solid #f4f4f4;
   }
   .board_list td.title {
