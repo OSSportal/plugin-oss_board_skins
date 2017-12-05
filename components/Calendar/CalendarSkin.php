@@ -21,8 +21,9 @@ class CalendarSkin extends OSSSkin
         /** @var \Xpressengine\Http\Request $request */
         $request = app('request');
 
-        $listStyle = $request->get('listStyle', 'calendar');
+        $listStyle = $request->get('listStyle', 'list');
         $this->data['listStyle'] = $listStyle;
+        $this->data['_originSkinPath'] = static::$path;
         $this->data['_parentSkinPath'] = parent::$path;
         $this->data['withoutList'] = true;
 

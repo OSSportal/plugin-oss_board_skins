@@ -5,7 +5,7 @@
 @if ($createPermission)
 <a href="{{ $urlHandler->get('create') }}"><span >{{ xe_trans('board::newPost') }}</span><i class="xi-pen-o"></i></a>
 @endif
-  <a href="/event" class="view_calendar">달력</a>
+  <a href="/event?listStyle=calendar" class="view_calendar">달력</a>
   <a href="/event?listStyle=list" class="view_list">리스트</a>
 </div>
 
@@ -50,6 +50,7 @@ opacity:0.3;
 
     <div class="ec_page">
         <form class="filter">
+	    <input type="hidden" name="listStyle" value="calendar" />
             <button type="button" class="btn-month" data-month="{{$calendarPrevMonth}}"><img src="/plugins/oss/components/Themes/OSS/assets/images/arr_left.gif" width="8" height="13"></button>
             <input type="text" name="calendar_month" value="{{$calendarMonth}}">
             <button type="button" class="btn-month" data-month="{{$calendarNextMonth}}"><img src="/plugins/oss/components/Themes/OSS/assets/images/arr_right.gif" width="8" height="13"></button>
@@ -126,5 +127,5 @@ onClose: function(dateText, inst) {
         });
     </script>
 @else
-    @include($_parentSkinPath.'/views/index')
+    @include($_originSkinPath.'/views/origin_index')
 @endif
