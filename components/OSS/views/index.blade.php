@@ -359,6 +359,8 @@
                     @elseif (in_array($columnName, ['created_at', 'updated_at', 'deleted_at']))
 
                         <td class="time xe-hidden-xs column-{{$columnName}}">{{ $item->{$columnName}->toDateString() }}</td>
+                    @elseif ($columnName == 'datahub')
+                        <td class="time xe-hidden-xs column-{{$columnName}}">{{ isset($arr_project_fields[$item->datahub_project_field_id]) ? $arr_project_fields[$item->datahub_project_field_id] : '' }}</td>
                     @elseif (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null)
                         <td class="xe-hidden-xs column-{{$columnName}}">{!! $fieldType->getSkin()->output($columnName, $item->getAttributes()) !!}</td>
                     @else
@@ -446,6 +448,8 @@
                             <td class="read_num xe-hidden-xs">{{ $item->{$columnName} }}</td>
                         @elseif (in_array($columnName, ['created_at', 'updated_at', 'deleted_at']))
                             <td class="time xe-hidden-xs column-{{$columnName}}">{{ $item->{$columnName}->toDateString() }}</td>
+                    @elseif ($columnName == 'datahub')
+                        <td class="time xe-hidden-xs column-{{$columnName}}">{{ isset($arr_project_fields[$item->datahub_project_field_id]) ? $arr_project_fields[$item->datahub_project_field_id] : ''}}</td>
                         @elseif (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null)
                             <td class="xe-hidden-xs column-{{$columnName}}">{!! $fieldType->getSkin()->output($columnName, $item->getAttributes()) !!}</td>
                         @else

@@ -48,6 +48,17 @@ class OSSSkin extends CommonSkin
             'board::msgDeleteConfirm',
         ]);
 
+	// datahub project fields
+        /** @var \Xpressengine\Plugins\OSS\ConfigHandler $configHandler */
+        $configHandler = app('xe.oss.config');
+        $config = $configHandler->getDefault();
+	$projectFieldItems = \XeCategory::cates()->find($config->get('project_field_category_id'))->getProgenitors();
+	$arrProjectFields = [];
+	foreach ($projectFieldItems as $projectFieldItem) {
+		$arrProjectFields[$projectFieldItem->id] = xe_trans($projectFieldItem->word);
+	}
+	$this->data['arr_project_fields'] = $arrProjectFields;
+
 	// kakaotalk api key for share 
 	$this->data['kakaotalk_api_key'] = app('config')->get('xe.kakaotalk_api');
 
