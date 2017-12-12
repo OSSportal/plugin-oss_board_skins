@@ -47,5 +47,13 @@ class KakaotalkShareItem extends AbstractToggleMenu
     {
         return null;
     }
+
+/**
+ * mobile 에서만 사용
+*/
+	public function allows()
+	{
+		return \Request::isMobile();
+	}
 }
 
