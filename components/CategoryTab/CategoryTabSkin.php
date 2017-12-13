@@ -29,51 +29,7 @@ class CategoryTabSkin extends OSSSkin
 
         $this->data['_parentSkinPath'] = parent::$path;
 
-        if (in_array($this->view, ['index', 'show'])) {
-            $this->data['categoryTabs'] = $this->categories();
-		// reset controller categories value
-		$this->data['categories'] = [];
-		foreach ($this->data['categoryTabs'] as $item) {
-			$this->data['categories'][] = [
-			    'value' => $item['value'],
-			    'text' => sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
-			];
-		}
-        }
-
-
         return parent::render();
     }
 
-    protected function categories()
-    {
-        $configHandler = app('xe.board.config');
-        $config = $configHandler->get($this->data['instanceId']);
-        $items = [];
-        if ($config->get('category') === true) {
-            $categoryItems = CategoryItem::where('category_id', $config->get('categoryId'))
-                ->orderBy('ordering')->get();
-
-            foreach ($categoryItems as $categoryItem) {
-                $model = Board::division($this->data['instanceId']);
-                $query = $model->where('instance_id', $this->data['instanceId'])->visible();
-                $query->leftJoin(
-                    'board_category',
-                    sprintf('%s.%s', $query->getQuery()->from, 'id'),
-                    '=',
-                    sprintf('%s.%s', 'board_category', 'target_id')
-                );
-                $query->where('item_id', $categoryItem->id);
-                $count = $query->count();
-
-                $items[] = [
-                    'value' => $categoryItem->id,
-                    'text' => $categoryItem->word,
-                    'count' => $count,
-                ];
-            }
-        }
-
-        return $items;
-    }
 }

@@ -14,6 +14,8 @@ use Xpressengine\Plugins\Board\BoardPermissionHandler;
 use Xpressengine\Plugins\Board\Handler as BoardHandler;
 use Xpressengine\Permission\Instance;
 use Xpressengine\Routing\InstanceConfig;
+use Xpressengine\Plugins\Board\Models\Board;
+use Xpressengine\Category\Models\CategoryItem;
 
 class OSSSkin extends CommonSkin
 {
@@ -61,6 +63,19 @@ class OSSSkin extends CommonSkin
 
 	// kakaotalk api key for share 
 	$this->data['kakaotalk_api_key'] = app('config')->get('xe.kakaotalk_api');
+
+	// category
+        if (in_array($this->view, ['index', 'show'])) {
+            $this->data['categoryTabs'] = $this->categories();
+		// reset controller categories value
+		$this->data['categories'] = [];
+		foreach ($this->data['categoryTabs'] as $item) {
+			$this->data['categories'][] = [
+			    'value' => $item['value'],
+			    'text' => sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
+			];
+		}
+        }
 
         // set skin path
         $this->data['_skinPath'] = static::$path;
@@ -217,5 +232,40 @@ $query = $query->where('writer', 'like', sprintf('%%%s%%', $request->get('search
 
             }
         );
+    }
+
+    protected function categories()
+    {
+        $configHandler = app('xe.board.config');
+        $config = $configHandler->get($this->data['instanceId']);
+        $items = [];
+        if ($config->get('category') === true) {
+            $categoryItems = CategoryItem::where('category_id', $config->get('categoryId'))
+                ->orderBy('ordering')->get();
+
+            foreach ($categoryItems as $categoryItem) {
+                $model = Board::division($this->data['instanceId']);
+                $query = $model->where('instance_id', $this->data['instanceId'])->visible();
+                $query->leftJoin(
+                    'board_category',
+                    sprintf('%s.%s', $query->getQuery()->from, 'id'),
+                    '=',
+                    sprintf('%s.%s', 'board_category', 'target_id')
+                );
+                $query->where('item_id', $categoryItem->id);
+                $count = $query->count();
+
+		if ($count == 0) {
+			continue;
+		}
+                $items[] = [
+                    'value' => $categoryItem->id,
+                    'text' => $categoryItem->word,
+                    'count' => $count,
+                ];
+            }
+        }
+
+        return $items;
     }
 }
