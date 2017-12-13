@@ -212,15 +212,15 @@ if (isset($this->data['paginate'])) {
 				$query = $func($query, $request, $config);
 
 if ($request->get('search_target') == 'title') {
-$query = $query->where('title', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+$query = $query->where('title', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
 }
 if ($request->get('search_target') == 'pure_content') {
-$query = $query->where('pure_content', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+$query = $query->where('pure_content', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
 }
 if ($request->get('search_target') == 'title_pure_content') {
 $query = $query->whereNested(function ($query) use ($request) {
-$query->where('title', 'like', sprintf('%%%s%%', $request->get('search_keyword')))
-->orWhere('pure_content', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+$query->where('title', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))))
+->orWhere('pure_content', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
 });
 }
 if ($request->get('search_target') == 'writer') {
