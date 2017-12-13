@@ -280,6 +280,8 @@
                         <th scope="col" class="column-th-category"><span>{{ xe_trans('board::category') }}</span></th>
                     @endif
                     <th scope="col" class="title column-th-{{$columnName}}"><span>{{ xe_trans('board::title') }}</span></th>
+                @elseif ($columnName == 'datahub')
+                    <th scope="col" class="column-th-datahub"><span>분야</span></th>
                 @else
                     @if (isset($dynamicFieldsById[$columnName]))
                         <th scope="col" class="column-th-{{$columnName}}"><span>{{ xe_trans($dynamicFieldsById[$columnName]->get('label')) }}</span></th>

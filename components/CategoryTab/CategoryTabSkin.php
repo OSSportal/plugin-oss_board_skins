@@ -7,7 +7,7 @@ use XeSkin;
 use Event;
 use Auth;
 use Gate;
-use Xpressengine\Category\Models\Category;
+use Xpressengine\Category\Models\CategoryItem;
 
 class CategoryTabSkin extends OSSSkin 
 {
@@ -31,7 +31,16 @@ class CategoryTabSkin extends OSSSkin
 
         if (in_array($this->view, ['index', 'show'])) {
             $this->data['categoryTabs'] = $this->categories();
+		// reset controller categories value
+		$this->data['categories'] = [];
+		foreach ($this->data['categoryTabs'] as $item) {
+			$this->data['categories'][] = [
+			    'value' => $item['value'],
+			    'text' => sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
+			];
+		}
         }
+
 
         return parent::render();
     }
@@ -42,8 +51,8 @@ class CategoryTabSkin extends OSSSkin
         $config = $configHandler->get($this->data['instanceId']);
         $items = [];
         if ($config->get('category') === true) {
-            $categoryItems = Category::find($config->get('categoryId'))->items;
-
+            $categoryItems = CategoryItem::where('category_id', $config->get('categoryId'))
+                ->orderBy('ordering')->get();
 
             foreach ($categoryItems as $categoryItem) {
                 $model = Board::division($this->data['instanceId']);

@@ -1,4 +1,4 @@
-
+@if(Request::segment(1) == 'info_techtip')
 <div class="intro_use info_techtip">
     <ul class="_oss_tab">
         @foreach ($categoryTabs as $categoryTab)
@@ -9,5 +9,6 @@
     </ul>
 
 </div>
+@endif
 
 @include($_parentSkinPath.'/views/index')
