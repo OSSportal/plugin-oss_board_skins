@@ -34,20 +34,19 @@ class OSSSkin extends CommonSkin
     public function render()
     {
 	// remove assent_count order type
+
         intercept(
             sprintf('%s@getOrders', BoardHandler::class),
             static::class.'-board-getOrders-remove-recommand',
             function ($func) {
                 $orders = $func();
-		if (\Request::get('aaaa') === '1') {
-			$newOrders = [];
-			foreach ($orders as $index => $order) {
-				if ($order['value'] == 'assent_count') {
-					continue;
-				}
-				$newOrders[] = $order;
+		$newOrders = [];
+		foreach ($orders as $index => $order) {
+			if ($order['value'] == 'assent_count') {
+				continue;
 			}
-	        }
+			$newOrders[] = $order;
+		}
                 return $newOrders;
             }
         );
