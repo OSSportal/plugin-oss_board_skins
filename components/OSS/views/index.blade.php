@@ -63,7 +63,7 @@
             @if($config->get('category') == true)
                 {!! uio('uiobject/board@select', [
                     'name' => 'category_item_id',
-                    'label' => xe_trans('xe::category'),
+                    'label' => '_custom_::' . xe_trans('xe::category'),
                     'value' => Request::get('category_item_id'),
                     'items' => $categories,
                 ]) !!}
@@ -71,7 +71,7 @@
 
             {!! uio('uiobject/board@select', [
                 'name' => 'order_type',
-                'label' => xe_trans('xe::order'),
+                'label' => '_custom_::' . xe_trans('xe::order'),
                 'value' => Request::get('order_type'),
                 'items' => $handler->getOrders(),
             ]) !!}
@@ -90,7 +90,7 @@
                                 <div class="xe-form-inline">
                                     {!! uio('uiobject/board@select', [
                                         'name' => 'copyTo',
-                                        'label' => xe_trans('xe::select'),
+                                        'label' => '_custom_::' . xe_trans('xe::select'),
                                         'items' => $boardList,
                                     ]) !!}
                                     <button type="button" class="xe-btn xe-btn-primary-outline __xe_btn_submit" data-url="{{ $urlHandler->managerUrl('copy') }}">{{ xe_trans('xe::copy') }}</button>
@@ -109,7 +109,7 @@
                                 <div class="xe-form-inline">
                                     {!! uio('uiobject/board@select', [
                                         'name' => 'moveTo',
-                                        'label' => xe_trans('xe::select'),
+                                        'label' => '_custom_::' . xe_trans('xe::select'),
                                         'items' => $boardList,
                                     ]) !!}
                                     <button type="button" class="xe-btn xe-btn-primary-outline __xe_btn_submit" data-url="{{ $urlHandler->managerUrl('move') }}">{{ xe_trans('xe::move') }}</button>
@@ -169,7 +169,7 @@
                                             <div class="xe-col-sm-9">
                                                 {!! uio('uiobject/board@select', [
                                                     'name' => 'category_item_id',
-                                                    'label' => xe_trans('xe::category'),
+                                                    'label' => '_custom_::' . xe_trans('xe::category'),
                                                     'value' => Request::get('category_item_id'),
                                                     'items' => $categories,
                                                 ]) !!}
@@ -208,7 +208,7 @@
                                             <div class="xe-form-group">
                                                 {!! uio('uiobject/board@select', [
                                                     'name' => 'period',
-                                                    'label' => xe_trans('xe::select'),
+                                                    'label' => '_custom_::' . xe_trans('xe::select'),
                                                     'value' => Request::get('period'),
                                                     'items' => $terms,
                                                 ]) !!}
@@ -387,7 +387,7 @@
 
                     <!-- LIST -->
             @foreach($paginate as $item)
-                <tr>
+                <tr @if(isset($currentItem) && $currentItem->id == $item->id) style="background-color:#f5f5f5"  @endif >
                     @if ($isManager === true)
                         <td class="check">
                             <label class="xe-label">

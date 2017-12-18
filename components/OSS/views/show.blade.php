@@ -26,7 +26,7 @@ requestUrl:'".$urlHandler->getShow($item)."'
 
     <div class="board_read">
                 <div class="read_header">
-@if(false == in_array(Request::segment(1), ['dev_support_activities', 'dev_competition_activities', 'kosslab_project']))
+@if(false == in_array(Request::segment(1), ['dev_support_activities', 'dev_competition_activities', 'kosslab_project']) && false)
                     @if($item->status == $item::STATUS_NOTICE)
                         <span class="category">{{ xe_trans('xe::notice') }} @if($config->get('category') == true && $item->boardCategory !== null){{ xe_trans($item->boardCategory->getWord()) }}@endif</span>
                     @elseif($config->get('category') == true && $item->boardCategory !== null)

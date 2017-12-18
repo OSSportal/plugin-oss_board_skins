@@ -40,8 +40,11 @@ class OSSSkin extends CommonSkin
         $this->setSkinConfig();
         $this->setDynamicFieldSkins();
         $this->setPaginationPresenter();
-        $this->setBoardList();
         $this->setTerms();
+
+        if ($this->isManager()) {
+            $this->setBoardList();
+        }
 
         // 스킨 view(blade)파일이나 js 에서 사용할 다국어 정의
         XeFrontend::translation([
@@ -72,7 +75,7 @@ class OSSSkin extends CommonSkin
 		foreach ($this->data['categoryTabs'] as $item) {
 			$this->data['categories'][] = [
 			    'value' => $item['value'],
-			    'text' => sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
+			    'text' => '_custom_::' . sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
 			];
 		}
         }
@@ -243,6 +246,43 @@ $query = $query->where('writer', 'like', sprintf('%%%s%%', $request->get('search
             $categoryItems = CategoryItem::where('category_id', $config->get('categoryId'))
                 ->orderBy('ordering')->get();
 
+$categoryIds = [];
+foreach ($categoryItems as $categoryItem) {
+$categoryIds[] = $categoryItem->id;
+}
+
+                $model = Board::division($this->data['instanceId']);
+                $query = $model->where('instance_id', $this->data['instanceId'])->visible();
+                $query->leftJoin(
+                    'board_category',
+                    sprintf('%s.%s', $query->getQuery()->from, 'id'),
+                    '=',
+                    sprintf('%s.%s', 'board_category', 'target_id')
+                );
+                $query->whereIn('item_id', $categoryIds);
+		$query->groupBy('item_id');
+                $rows = $query->get(['item_id', new \Illuminate\Database\Query\Expression('count(`item_id`) as cnt')]);
+
+$counts = [];
+	foreach ($rows as $row) {
+$counts[$row->item_id] = $row->cnt;
+	}
+
+            foreach ($categoryItems as $categoryItem) {
+		if (isset($counts[$categoryItem->id]) == false) {
+continue;
+}
+		if ($counts[$categoryItem->id] == 0) {
+			continue;
+		}
+
+                $items[] = [
+                    'value' => $categoryItem->id,
+                    'text' => $categoryItem->word,
+                    'count' => $counts[$categoryItem->id],
+                ];
+	}
+/*
             foreach ($categoryItems as $categoryItem) {
                 $model = Board::division($this->data['instanceId']);
                 $query = $model->where('instance_id', $this->data['instanceId'])->visible();
@@ -264,6 +304,7 @@ $query = $query->where('writer', 'like', sprintf('%%%s%%', $request->get('search
                     'count' => $count,
                 ];
             }
+*/
         }
 
         return $items;
