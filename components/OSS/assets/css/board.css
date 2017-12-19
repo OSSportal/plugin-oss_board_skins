@@ -546,7 +546,7 @@
 .board_list .favorite a.on {
   color: #ffda00;
 }
-.board_list td.title{letter-spacing:-1px; text-align:left;}
+.board_list td.title{text-align:left;}
 
 .board_list td.title .title_text{
   margin-right: 5px; display:inline-block; max-width: 350px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
