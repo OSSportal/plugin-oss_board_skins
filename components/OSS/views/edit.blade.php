@@ -1,6 +1,6 @@
 {{ XeFrontend::rule('board', $rules) }}
 
-{{ XeFrontend::js('plugins/board/assets/js/build/BoardTags.js')->appendTo('body')->load() }}
+{{ XeFrontend::js('plugins/board/assets/js/BoardTags.js')->appendTo('body')->load() }}
 
 <div class="board_write">
     <form method="post" id="board_form" class="__board_form" action="{{ $urlHandler->get('update', app('request')->query->all()) }}" enctype="multipart/form-data" data-rule="board" data-rule-alert-type="toast" data-instance_id="{{$item->instance_id}}" data-url-preview="{{ $urlHandler->get('preview') }}">
@@ -89,11 +89,11 @@
                         </label>
                     @endif
 
-                    <label class="xe-label">
+                    <!--<label class="xe-label">
                         <input type="checkbox" name="display" value="{{$item::DISPLAY_SECRET}}" @if($item->display == $item::DISPLAY_SECRET) checked="checked" @endif>
                         <span class="xe-input-helper"></span>
                         <span class="xe-label-text">{{xe_trans('board::secretPost')}}</span>
-                    </label>
+                    </label>-->
 
                     @if($isManager === true)
                         <label class="xe-label">

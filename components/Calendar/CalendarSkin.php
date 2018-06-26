@@ -34,9 +34,23 @@ class CalendarSkin extends OSSSkin
         );
         if ($listStyle == 'calendar' && $this->view == 'index') {
             $this->calendar();
+        } elseif ($this->view === 'show') {
+            $this->intercept();
         }
+        
 
         return parent::render();
+    }
+
+    protected function intercept()
+    {
+        intercept('XeEditor@compile', 'attach.host.to.img', function ($method, $instanceId, $content, $htmlable = false) {
+            $content = $method($instanceId, $content, $htmlable);
+            $content = preg_replace_callback('~<img.*?src=["\']+(.*?)["\']+~', function ($match) {
+                return str_replace($match[1], asset($match[1]), $match[0]);
+            }, $content);
+            return $content;
+        });
     }
 
     protected function calendar()
