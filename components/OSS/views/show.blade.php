@@ -1,9 +1,9 @@
 {{ XeFrontend::js('/assets/vendor/jqueryui/jquery.event.drag-2.2.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.core.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.formatters.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.grid.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.dataview.js')->appendTo('head')->load() }}
-{{ XeFrontend::css('/assets/vendor/slickgrid/slick.grid.css')->load() }}
+{{ XeFrontend::js('/assets/core/xe-ui-component/slickgrid/slick.core.js')->appendTo('head')->load() }}
+{{ XeFrontend::js('/assets/core/xe-ui-component/slickgrid/slick.formatters.js')->appendTo('head')->load() }}
+{{ XeFrontend::js('/assets/core/xe-ui-component/slickgrid/slick.grid.js')->appendTo('head')->load() }}
+{{ XeFrontend::js('/assets/core/xe-ui-component/slickgrid/slick.dataview.js')->appendTo('head')->load() }}
+{{ XeFrontend::css('/assets/core/xe-ui-component/slickgrid/slick.grid.css')->load() }}
 
 @if ($kakaotalk_api_key)
 {{ XeFrontend::js('//developers.kakao.com/sdk/js/kakao.min.js')->appendTo('body')->load()}}
