@@ -16,7 +16,7 @@
     </style>
 @elseif(in_array(Request::segment(1), ['dev_competition_activities']))
     <style>
-        .board_list td.title .title_text{margin-right: 5px; display:inline-block; max-width: 350px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+        .board_list td.title .title_text{margin-right: 5px; display:inline-block; max-width: 300px;  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
     </style>
 @elseif(in_array(Request::segment(1), ['kosslab_project', 'dev_support_activities']))
     <style>
