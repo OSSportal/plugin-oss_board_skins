@@ -114,7 +114,7 @@
             {{--<a href="#" class="bd_btn btn_temp_load __xe_temp_btn_load">임시저장 로드</a>--}}
             {{--<a href="#" class="bd_btn btn_temp_save __xe_temp_btn_save">임시저장</a>--}}
             {{--<a href="#" class="bd_btn btn_preview __xe_btn_preview">{{ xe_trans('xe::preview') }}</a>--}}
-            <button type="submit" class="bd_btn btn_submit __xe_btn_submit">{{ xe_trans('xe::submit') }}</buttom>
+            <button type="submit" class="bd_btn btn_submit __xe_btn_submit">{{ xe_trans('xe::submit') }}</button>
         </div>
     </div>
     </form>
