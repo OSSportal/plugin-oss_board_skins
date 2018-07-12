@@ -90,12 +90,12 @@ class CalendarSkin extends OSSSkin
         $model = Board::division($this->data['instanceId']);
         $query = $model->where('instance_id', $this->data['instanceId'])->visible();
         $query->getProxyManager()->wheres($query->getQuery(), [
-            'between' => [
-                'seminar_event_started_at' => date('Y-m-d 00:00:00', $startTime),
-                'seminar_event_ended_at' => date('Y-m-d 23:59:59', $endTime),
-            ],
+            'seminar_event_started_at' => [date('Y-m-d 00:00:00', $startTime), '>='],
+            'seminar_event_ended_at' => [date('Y-m-d 23:59:59', $endTime), '<='],
         ]);
-        $items = $query->get();
+        $items = $query->orderBy('seminar_event_started_at', 'asc')
+            ->orderBy('seminar_event_ended_at', 'desc')->get();
+
         $urlHandler = app('Xpressengine\Plugins\Board\UrlHandler');
 
         $events = [];
@@ -137,17 +137,7 @@ class CalendarSkin extends OSSSkin
             }
         }
 
-
         // 두번째 안
-        $model = Board::division($this->data['instanceId']);
-        $query = $model->where('instance_id', $this->data['instanceId'])->visible();
-        $query->getProxyManager()->wheres($query->getQuery(), [
-            'seminar_event_started_at' => [date('Y-m-d 00:00:00', $startTime), '>='],
-            'seminar_event_ended_at' => [date('Y-m-d 23:59:59', $endTime), '<='],
-        ]);
-        $items = $query->orderBy('seminar_event_started_at', 'asc')
-            ->orderBy('seminar_event_ended_at', 'desc')->get();
-
         $calendarTime = [];
         $timeToLine = [];
         $dateDots = [];
