@@ -315,7 +315,7 @@
                             @if ($item->display == $item::DISPLAY_SECRET)
                                 <span class="bd_ico_lock"><i class="xi-lock"></i><span class="xe-sr-only">secret</span></span>
                             @endif
-                            <a href="{{$urlHandler->getShow($item, Request::all())}}" id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
+                            <a href="{{$urlHandler->getShow($item, Request::all())}}" id="{{$columnName}}_{{$item->id}}" class="title_text">{!! strip_tags(html_entity_decode($item->title)) !!}</a>
                             @if($item->comment_count > 0)
                                 <a href="{{$urlHandler->getShow($item, Request::all())}}#comment" class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
                             @endif
@@ -403,7 +403,7 @@
                                 @if ($item->display == $item::DISPLAY_SECRET)
                                     <span class="bd_ico_lock"><i class="xi-lock"></i><span class="xe-sr-only">secret</span></span>
                                 @endif
-                                <a href="{{$urlHandler->getShow($item, Request::all())}}" id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
+                                <a href="{{$urlHandler->getShow($item, Request::all())}}" id="{{$columnName}}_{{$item->id}}" class="title_text">{!! strip_tags(html_entity_decode($item->title)) !!}</a>
                                 @if($item->comment_count > 0)
                                     <a href="{{$urlHandler->getShow($item, Request::all())}}#comment" class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
                                 @endif

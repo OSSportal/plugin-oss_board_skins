@@ -12,7 +12,7 @@
                     @elseif($config->get('category') == true && $item->boardCategory !== null)
                         <span class="category">{{ xe_trans($item->boardCategory->getWord()) }}</span>
                     @endif
-                    <h1><a href="{{ $urlHandler->getShow($item) }}">{!! $item->title !!}</a></h1>
+                    <h1><a href="{{ $urlHandler->getShow($item) }}">{!! strip_tags(html_entity_decode($item->title)) !!}</a></h1>
 
                     <div class="more_info">
                         <!-- [D] 클릭시 클래스 on 적용 -->
