@@ -217,5 +217,7 @@ class CalendarSkin extends OSSSkin
         $this->data['calendarMonth'] = date('Y-m', $standardTime);
         $this->data['calendarPrevMonth'] = date('Y-m', strtotime('-1 month', $standardTime));
         $this->data['calendarNextMonth'] = date('Y-m', strtotime('+1 month', $standardTime));
+        $this->data['calendarPrevYear'] = date('Y-m', strtotime('-1 year', $standardTime));
+        $this->data['calendarNextYear'] = date('Y-m', strtotime('+1 year', $standardTime));
     }
 }

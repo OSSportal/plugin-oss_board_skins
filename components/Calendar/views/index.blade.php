@@ -116,13 +116,11 @@
     <div class="ec_page">
         <form class="filter">
             <input type="hidden" name="listStyle" value="calendar"/>
-            <button type="button" class="btn-month" data-month="{{$calendarPrevMonth}}"><img
-                        src="/plugins/oss/components/Themes/OSS/assets/images/arr_left.gif" width="8" height="13">
-            </button>
+            <button type="button" class="btn-month" data-month="{{$calendarPrevYear}}"><<</button>
+            <button type="button" class="btn-month" data-month="{{$calendarPrevMonth}}"><img src="/plugins/oss/components/Themes/OSS/assets/images/arr_left.gif" width="8" height="13"></button>
             <input type="text" name="calendar_month" value="{{$calendarMonth}}">
-            <button type="button" class="btn-month" data-month="{{$calendarNextMonth}}"><img
-                        src="/plugins/oss/components/Themes/OSS/assets/images/arr_right.gif" width="8" height="13">
-            </button>
+            <button type="button" class="btn-month" data-month="{{$calendarNextMonth}}"><img src="/plugins/oss/components/Themes/OSS/assets/images/arr_right.gif" width="8" height="13"></button>
+            <button type="button" class="btn-month" data-month="{{$calendarNextYear}}">>></button>
         </form>
     </div>
 
