@@ -1,4 +1,5 @@
 <?php
+
 namespace Xpressengine\Plugins\OSSBoardSkins\Components\OSS;
 
 use Xpressengine\Plugins\Board\Components\Skins\Board\Common\CommonSkin;
@@ -23,7 +24,7 @@ class OSSSkin extends CommonSkin
 
     public static function boot()
     {
-	static::interceptSetSkinTargetId();
+        static::interceptSetSkinTargetId();
     }
 
     /**
@@ -33,20 +34,20 @@ class OSSSkin extends CommonSkin
      */
     public function render()
     {
-	// remove assent_count order type
+        // remove assent_count order type
 
         intercept(
             sprintf('%s@getOrders', BoardHandler::class),
-            static::class.'-board-getOrders-remove-recommand',
+            static::class . '-board-getOrders-remove-recommand',
             function ($func) {
                 $orders = $func();
-		$newOrders = [];
-		foreach ($orders as $index => $order) {
-			if ($order['value'] == 'assent_count') {
-				continue;
-			}
-			$newOrders[] = $order;
-		}
+                $newOrders = [];
+                foreach ($orders as $index => $order) {
+                    if ($order['value'] == 'assent_count') {
+                        continue;
+                    }
+                    $newOrders[] = $order;
+                }
                 return $newOrders;
             }
         );
@@ -71,44 +72,56 @@ class OSSSkin extends CommonSkin
             'board::msgDeleteConfirm',
         ]);
 
-	// datahub project fields
+        // datahub project fields
         /** @var \Xpressengine\Plugins\OSS\ConfigHandler $configHandler */
         $configHandler = app('xe.oss.config');
         $config = $configHandler->getDefault();
-	$projectFieldItems = \XeCategory::cates()->find($config->get('project_field_category_id'))->getProgenitors();
-	$arrProjectFields = [];
-	foreach ($projectFieldItems as $projectFieldItem) {
-		$arrProjectFields[$projectFieldItem->id] = xe_trans($projectFieldItem->word);
-	}
-	$this->data['arr_project_fields'] = $arrProjectFields;
+        $projectFieldItems = \XeCategory::cates()->find($config->get('project_field_category_id'))->getProgenitors();
+        $arrProjectFields = [];
+        foreach ($projectFieldItems as $projectFieldItem) {
+            $arrProjectFields[$projectFieldItem->id] = xe_trans($projectFieldItem->word);
+        }
+        $this->data['arr_project_fields'] = $arrProjectFields;
 
-	// kakaotalk api key for share 
-	$this->data['kakaotalk_api_key'] = app('config')->get('xe.kakaotalk_api');
+        // kakaotalk api key for share
+        $this->data['kakaotalk_api_key'] = app('config')->get('xe.kakaotalk_api');
 
-	// category
+        // category
         if (in_array($this->view, ['index', 'show'])) {
             $this->data['categoryTabs'] = $this->categories();
-		// reset controller categories value
-		$this->data['categories'] = [];
-		foreach ($this->data['categoryTabs'] as $item) {
-			$this->data['categories'][] = [
-			    'value' => $item['value'],
-			    'text' => '_custom_::' . sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
-			];
-		}
+            // reset controller categories value
+            $this->data['categories'] = [];
+            foreach ($this->data['categoryTabs'] as $item) {
+                $this->data['categories'][] = [
+                    'value' => $item['value'],
+                    'text' => '_custom_::' . sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
+                ];
+            }
+
+            $this->data['categoryFields'] = [];
+            if (in_array(\Request::segment(1), ['dev_support_activities', 'dev_competition_activities', 'kosslab_project'])) {
+                $fields = $this->getCategoryFields($projectFieldItems);
+
+                foreach ($fields as $item) {
+                    $this->data['categoryFields'][] = [
+                        'value' => $item['value'],
+                        'text' => '_custom_::' . sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
+                    ];
+                }
+            }
         }
 
         // set skin path
         $this->data['_skinPath'] = static::$path;
         $this->data['isManager'] = $this->isManager();
 
-if (isset($this->data['paginate'])) {
-        $total = $this->data['paginate']->total();
-        $currentPage = \Request::get('page', 1);
-        $perPage = $this->data['config']->get('perPage');
-        $startCount = $total - (($currentPage-1) * $perPage);
-        $this->data['_startCount'] = $startCount;
-}
+        if (isset($this->data['paginate'])) {
+            $total = $this->data['paginate']->total();
+            $currentPage = \Request::get('page', 1);
+            $perPage = $this->data['config']->get('perPage');
+            $startCount = $total - (($currentPage - 1) * $perPage);
+            $this->data['_startCount'] = $startCount;
+        }
 
         $boardPermission = app('Xpressengine\Plugins\Board\BoardPermissionHandler');
         $this->data['createPermission'] = Gate::allows(
@@ -121,14 +134,14 @@ if (isset($this->data['paginate'])) {
          * CommonSkin extends by other Skins. Extended Skin can make just 'index.blade.php'
          * and other blade files will use to CommonSkin's blade files.
          */
-	if (View::exists(sprintf('%s/views/%s', static::$path, $this->view)) == false) {
-            static::$path = self::$path;
-	}
-/*
-        if ($this->view != 'index') {
+        if (View::exists(sprintf('%s/views/%s', static::$path, $this->view)) == false) {
             static::$path = self::$path;
         }
-*/
+        /*
+                if ($this->view != 'index') {
+                    static::$path = self::$path;
+                }
+        */
         $contentView = $this->render2();
 
         /**
@@ -180,7 +193,7 @@ if (isset($this->data['paginate'])) {
     {
         intercept(
             sprintf('%s@setSkinTargetId', Presenter::class),
-            static::class.'-set_skin_target_id',
+            static::class . '-set_skin_target_id',
             function ($func, $skinTargetId) {
                 $func($skinTargetId);
                 if (!$skinTargetId) {
@@ -202,55 +215,61 @@ if (isset($this->data['paginate'])) {
 
                 // target 의 스킨이 현재 skin 의 아이디와 일치하는지 확인
                 if (in_array($instanceConfig->getUrl(), ['dev_support_activities', 'dev_competition_activities', 'kosslab_project']) && $assignedSkin->getId() == static::getId()) {
-			// check instance
-			intercept(
-			    sprintf('%s@getOrders', BoardHandler::class),
-			    static::class.'-board-getOrders',
-			    function ($func) {
-				$orders = $func();
+                    // check instance
+                    intercept(
+                        sprintf('%s@getOrders', BoardHandler::class),
+                        static::class . '-board-getOrders',
+                        function ($func) {
+                            $orders = $func();
 
-				$orders[] = ['value' => 'datahub_year', 'text' => '연도순'];
-				return $orders;
-			    }
-			);
+                            $orders[] = ['value' => 'datahub_year', 'text' => '연도순'];
+                            return $orders;
+                        }
+                    );
 
-			intercept(
-			    sprintf('%s@makeOrder', BoardHandler::class),
-			    static::class.'-board-makeOrder',
-			    function ($func, $query, $request, $config) {
-				$query = $func($query, $request, $config);
-				if ($request->get('order_type') == 'datahub_year') {
-					$query->orderBy('datahub_year', 'desc')->orderBy('head', 'desc');
-				}
-				return $query;
-			    }
-			);
+                    intercept(
+                        sprintf('%s@makeOrder', BoardHandler::class),
+                        static::class . '-board-makeOrder',
+                        function ($func, $query, $request, $config) {
+                            $query = $func($query, $request, $config);
+                            if ($request->get('order_type') == 'datahub_year') {
+                                $query->orderBy('datahub_year', 'desc')->orderBy('head', 'desc');
+                            }
+                            return $query;
+                        }
+                    );
                 }
 
-			intercept(
-			    sprintf('%s@makeWhere', BoardHandler::class),
-			    static::class.'-board-makeWhere',
-			    function ($func, $query, $request, $config) {
-				$query = $func($query, $request, $config);
+                intercept(
+                    sprintf('%s@makeWhere', BoardHandler::class),
+                    static::class . '-board-makeWhere',
+                    function ($func, $query, $request, $config) {
+                        $query = $func($query, $request, $config);
 
-if ($request->get('search_target') == 'title') {
-$query = $query->where('title', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
-}
-if ($request->get('search_target') == 'pure_content') {
-$query = $query->where('pure_content', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
-}
-if ($request->get('search_target') == 'title_pure_content') {
-$query = $query->whereNested(function ($query) use ($request) {
-$query->where('title', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))))
-->orWhere('pure_content', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
-});
-}
-if ($request->get('search_target') == 'writer') {
-$query = $query->where('writer', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
-}
-				return $query;
-			    }
-			);
+                        if ($request->get('search_target') == 'title') {
+                            $query = $query->where('title', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
+                        }
+                        if ($request->get('search_target') == 'pure_content') {
+                            $query = $query->where('pure_content', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
+                        }
+                        if ($request->get('search_target') == 'title_pure_content') {
+                            $query = $query->whereNested(function ($query) use ($request) {
+                                $query->where('title', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))))
+                                    ->orWhere('pure_content', 'like', sprintf('%%%s%%', implode('%', explode(' ', $request->get('search_keyword')))));
+                            });
+                        }
+                        if ($request->get('search_target') == 'writer') {
+                            $query = $query->where('writer', 'like', sprintf('%%%s%%', $request->get('search_keyword')));
+                        }
+                        if ($categoryFieldId = $request->get('category_field_item_id')) {
+                            $query->getProxyManager()->wheres($query->getQuery(), [
+                                'datahub_project_field_id' => $categoryFieldId,
+                            ]);
+                        }
+
+                        return $query;
+                    }
+                );
 
             }
         );
@@ -265,65 +284,106 @@ $query = $query->where('writer', 'like', sprintf('%%%s%%', $request->get('search
             $categoryItems = CategoryItem::where('category_id', $config->get('categoryId'))
                 ->orderBy('ordering')->get();
 
-$categoryIds = [];
-foreach ($categoryItems as $categoryItem) {
-$categoryIds[] = $categoryItem->id;
-}
+            $categoryIds = [];
+            foreach ($categoryItems as $categoryItem) {
+                $categoryIds[] = $categoryItem->id;
+            }
 
-                $model = Board::division($this->data['instanceId']);
-                $query = $model->where('instance_id', $this->data['instanceId'])->visible();
-                $query->leftJoin(
-                    'board_category',
-                    sprintf('%s.%s', $query->getQuery()->from, 'id'),
-                    '=',
-                    sprintf('%s.%s', 'board_category', 'target_id')
-                );
-                $query->whereIn('item_id', $categoryIds);
-		$query->groupBy('item_id');
-                $rows = $query->get(['item_id', new \Illuminate\Database\Query\Expression('count(`item_id`) as cnt')]);
+            $model = Board::division($this->data['instanceId']);
+            $query = $model->where('instance_id', $this->data['instanceId'])->visible();
+            $query->leftJoin(
+                'board_category',
+                sprintf('%s.%s', $query->getQuery()->from, 'id'),
+                '=',
+                sprintf('%s.%s', 'board_category', 'target_id')
+            );
+            $query->whereIn('item_id', $categoryIds);
 
-$counts = [];
-	foreach ($rows as $row) {
-$counts[$row->item_id] = $row->cnt;
-	}
+            if ($categoryFieldId = \Request::get('category_field_item_id')) {
+                $query = $query->getProxyManager()->get($query->getQuery());
+
+                $query->where('datahub_project_field_id', $categoryFieldId);
+            }
+
+            $query->groupBy('item_id');
+            $rows = $query->get(['item_id', new \Illuminate\Database\Query\Expression('count(`item_id`) as cnt')]);
+
+            $counts = [];
+            foreach ($rows as $row) {
+                $counts[$row->item_id] = $row->cnt;
+            }
 
             foreach ($categoryItems as $categoryItem) {
-		if (isset($counts[$categoryItem->id]) == false) {
-continue;
-}
-		if ($counts[$categoryItem->id] == 0) {
-			continue;
-		}
+                if (isset($counts[$categoryItem->id]) == false) {
+                    continue;
+                }
+                if ($counts[$categoryItem->id] == 0) {
+                    continue;
+                }
 
                 $items[] = [
                     'value' => $categoryItem->id,
                     'text' => $categoryItem->word,
                     'count' => $counts[$categoryItem->id],
                 ];
-	}
-/*
-            foreach ($categoryItems as $categoryItem) {
-                $model = Board::division($this->data['instanceId']);
-                $query = $model->where('instance_id', $this->data['instanceId'])->visible();
+            }
+        }
+
+        return $items;
+    }
+
+    protected function getCategoryFields($projectFields)
+    {
+        $configHandler = app('xe.board.config');
+        $config = $configHandler->get($this->data['instanceId']);
+        $items = [];
+
+        if ($config->get('category') === true) {
+            $categoryIds = [];
+            foreach ($projectFields as $field) {
+                $categoryIds[] = $field->id;
+            }
+
+            $model = Board::division($this->data['instanceId']);
+            $query = $model->where('instance_id', $this->data['instanceId'])->visible();
+
+            if ($categoryId = \Request::get('category_item_id')) {
                 $query->leftJoin(
                     'board_category',
                     sprintf('%s.%s', $query->getQuery()->from, 'id'),
                     '=',
                     sprintf('%s.%s', 'board_category', 'target_id')
                 );
-                $query->where('item_id', $categoryItem->id);
-                $count = $query->count();
 
-		if ($count == 0) {
-			continue;
-		}
+                $query->where('item_id', $categoryId);
+            }
+
+            $query = $query->getProxyManager()->get($query->getQuery());
+
+            $query->whereIn('datahub_project_field_id', $categoryIds);
+            $query->groupBy('datahub_project_field_id');
+
+            $rows = $query->get(['datahub_project_field_id', new \Illuminate\Database\Query\Expression('count(`datahub_project_field_id`) as cnt')]);
+
+            $counts = [];
+            foreach ($rows as $row) {
+                $counts[$row->datahub_project_field_id] = $row->cnt;
+            }
+
+            foreach ($projectFields as $categoryItem) {
+                if (isset($counts[$categoryItem->id]) == false) {
+                    continue;
+                }
+                if ($counts[$categoryItem->id] == 0) {
+                    continue;
+                }
+
                 $items[] = [
                     'value' => $categoryItem->id,
                     'text' => $categoryItem->word,
-                    'count' => $count,
+                    'count' => $counts[$categoryItem->id],
                 ];
             }
-*/
         }
 
         return $items;
