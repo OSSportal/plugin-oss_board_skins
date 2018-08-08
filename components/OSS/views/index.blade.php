@@ -18,18 +18,7 @@
         width: 20px;
     }
 </style>
-@if(in_array(Request::segment(1), ['dev_support_activities']))
-    <style>
-        .board_list td.title .title_text {
-            margin-right: 5px;
-            display: inline-block;
-            max-width: 380px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    </style>
-@elseif(in_array(Request::segment(1), ['dev_competition_activities']))
+@if(in_array(Request::segment(1), ['dev_competition_activities', 'dev_support_activities']))
     <style>
         .board_list td.title .title_text {
             margin-right: 5px;
