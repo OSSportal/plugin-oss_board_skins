@@ -548,8 +548,15 @@
 }
 .board_list td.title{text-align:left;}
 
-.board_list td.title .title_text{
-  margin-right: 5px; display:inline-block; max-width: 350px; overflow:hidden; text-overflow:ellipsis;}
+.board_list td.title .title_text {
+  overflow: hidden;
+  float: left;
+  max-width: 80%;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-right: 5px;
+}
 
 .board_list .column-title {
   white-space: normal;
@@ -1863,4 +1870,18 @@ right:0;
 #xe-editor-content td,
 .cke_editable td {
   padding: 4px 4px;
+}
+
+.oss-board_list th {
+}
+
+.oss-board_list td {
+}
+
+.oss-board_list th .check {
+  width: 20px;
+}
+
+.oss-board_list td .check {
+  width: 20px;
 }

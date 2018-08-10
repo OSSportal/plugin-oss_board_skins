@@ -1,29 +1,4 @@
 {{ XeFrontend::js('assets/core/xe-ui-component/js/xe-page.js')->appendTo('body')->load() }}
-<style>
-    .oss-board_list th {
-    }
-
-    .oss-board_list td {
-    }
-
-    .oss-board_list th .check {
-        width: 20px;
-    }
-
-    .oss-board_list td .check {
-        width: 20px;
-    }
-</style>
-
-<style>
-    .board_list td.title .title_text {
-        overflow: hidden;
-        float: left;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-    }
-</style>
 
 <div class="bd_oss">
     <div class="board_header">
