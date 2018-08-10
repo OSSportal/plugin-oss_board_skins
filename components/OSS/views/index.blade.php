@@ -28,7 +28,7 @@
     }
 
     .board_list td.title .title_text a{
-        display: block;
+        display: inline-block;
     }
 </style>
 
@@ -383,7 +383,7 @@
                             @endif
                             <td class="title column-{{$columnName}}">
 
-                                <div class="title_text">
+                                <p class="title_text">
                                     @if ($item->display == $item::DISPLAY_SECRET)
                                         <span class="bd_ico_lock"><i class="xi-lock"></i><span
                                                     class="xe-sr-only">secret</span></span>
@@ -402,7 +402,7 @@
                                         <span class="bd_ico_new"><i class="xi-new"></i><span
                                                     class="xe-sr-only">new</span></span>
                                     @endif
-                                </div>
+                                </p>
 
                                 {{--
                                                 <div class="more_info xe-visible-xs">
@@ -487,7 +487,7 @@
                                 <td class="category xe-hidden-xs column-category">{!! $item->boardCategory !== null ? xe_trans($item->boardCategory->categoryItem->word) : '' !!}</td>
                             @endif
                             <td class="title column-{{$columnName}}">
-                                <div class="title_text">
+                                <p class="title_text">
                                     @if ($item->display == $item::DISPLAY_SECRET)
                                         <span class="bd_ico_lock"><i class="xi-lock"></i><span
                                                     class="xe-sr-only">secret</span></span>
@@ -506,7 +506,7 @@
                                         <span class="bd_ico_new"><i class="xi-new"></i><span
                                                     class="xe-sr-only">new</span></span>
                                     @endif
-                                </div>
+                                </p>
                                 {{--
                                                                 <div class="more_info xe-visible-xs">
                                                                     @if ($item->hasAuthor())
