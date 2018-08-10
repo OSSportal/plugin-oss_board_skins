@@ -1480,12 +1480,7 @@
     border-color: #ddd;
   }
   .board_list td.check {width: 42px}
-  .board_list td.favorite,
-  .board_list td.category,
-  .board_list td.title,
-  .board_list td.author,
-  .board_list td.read_num,
-  .board_list td.time { width: auto}
+
   .board_list tr.readed .mb_autohr {
     color: #bebebe;
   }
