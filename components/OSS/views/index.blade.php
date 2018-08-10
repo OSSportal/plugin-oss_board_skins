@@ -17,18 +17,11 @@
 
 <style>
     .board_list td.title .title_text {
-        display: inline-block;
         overflow: hidden;
-        width: 0;
-        min-width: 100%;
-        margin-right: 5px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        text-align: left;
-    }
-
-    .board_list td.title .title_text a{
-        display: inline-block;
+        float: left;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
     }
 </style>
 
@@ -382,28 +375,24 @@
                                 <td class="category xe-hidden-xs column-category">{!! $item->boardCategory !== null ? xe_trans($item->boardCategory->categoryItem->word) : '' !!}</td>
                             @endif
                             <td class="title column-{{$columnName}}">
-
-                                <p class="title_text">
-                                    @if ($item->display == $item::DISPLAY_SECRET)
-                                        <span class="bd_ico_lock"><i class="xi-lock"></i><span
-                                                    class="xe-sr-only">secret</span></span>
-                                    @endif
-                                    <a href="{{$urlHandler->getShow($item, Request::all())}}"
-                                       id="{{$columnName}}_{{$item->id}}">{!! $item->title !!}</a>
-                                    @if($item->comment_count > 0)
-                                        <a href="{{$urlHandler->getShow($item, Request::all())}}#comment"
-                                           class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
-                                    @endif
-                                    @if ($item->data->file_count > 0)
-                                        <span class="bd_ico_file"><i class="xi-paperclip"></i><span
-                                                    class="xe-sr-only">file</span></span>
-                                    @endif
-                                    @if($item->isNew($config->get('newTime')))
-                                        <span class="bd_ico_new"><i class="xi-new"></i><span
-                                                    class="xe-sr-only">new</span></span>
-                                    @endif
-                                </p>
-
+                                @if ($item->display == $item::DISPLAY_SECRET)
+                                    <span class="bd_ico_lock"><i class="xi-lock"></i><span
+                                                class="xe-sr-only">secret</span></span>
+                                @endif
+                                <a href="{{$urlHandler->getShow($item, Request::all())}}"
+                                   id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
+                                @if($item->comment_count > 0)
+                                    <a href="{{$urlHandler->getShow($item, Request::all())}}#comment"
+                                       class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
+                                @endif
+                                @if ($item->data->file_count > 0)
+                                    <span class="bd_ico_file"><i class="xi-paperclip"></i><span
+                                                class="xe-sr-only">file</span></span>
+                                @endif
+                                @if($item->isNew($config->get('newTime')))
+                                    <span class="bd_ico_new"><i class="xi-new"></i><span
+                                                class="xe-sr-only">new</span></span>
+                                @endif
                                 {{--
                                                 <div class="more_info xe-visible-xs">
                                                     @if ($item->hasAuthor())
@@ -487,26 +476,24 @@
                                 <td class="category xe-hidden-xs column-category">{!! $item->boardCategory !== null ? xe_trans($item->boardCategory->categoryItem->word) : '' !!}</td>
                             @endif
                             <td class="title column-{{$columnName}}">
-                                <p class="title_text">
-                                    @if ($item->display == $item::DISPLAY_SECRET)
-                                        <span class="bd_ico_lock"><i class="xi-lock"></i><span
-                                                    class="xe-sr-only">secret</span></span>
-                                    @endif
-                                    <a href="{{$urlHandler->getShow($item, Request::all())}}"
-                                       id="{{$columnName}}_{{$item->id}}">{!! $item->title !!}</a>
-                                    @if($item->comment_count > 0)
-                                        <a href="{{$urlHandler->getShow($item, Request::all())}}#comment"
-                                           class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
-                                    @endif
-                                    @if ($item->data->file_count > 0)
-                                        <span class="bd_ico_file"><i class="xi-paperclip"></i><span
-                                                    class="xe-sr-only">file</span></span>
-                                    @endif
-                                    @if($item->isNew($config->get('newTime')))
-                                        <span class="bd_ico_new"><i class="xi-new"></i><span
-                                                    class="xe-sr-only">new</span></span>
-                                    @endif
-                                </p>
+                                @if ($item->display == $item::DISPLAY_SECRET)
+                                    <span class="bd_ico_lock"><i class="xi-lock"></i><span
+                                                class="xe-sr-only">secret</span></span>
+                                @endif
+                                <a href="{{$urlHandler->getShow($item, Request::all())}}"
+                                   id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
+                                @if($item->comment_count > 0)
+                                    <a href="{{$urlHandler->getShow($item, Request::all())}}#comment"
+                                       class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
+                                @endif
+                                @if ($item->data->file_count > 0)
+                                    <span class="bd_ico_file"><i class="xi-paperclip"></i><span
+                                                class="xe-sr-only">file</span></span>
+                                @endif
+                                @if($item->isNew($config->get('newTime')))
+                                    <span class="bd_ico_new"><i class="xi-new"></i><span
+                                                class="xe-sr-only">new</span></span>
+                                @endif
                                 {{--
                                                                 <div class="more_info xe-visible-xs">
                                                                     @if ($item->hasAuthor())
