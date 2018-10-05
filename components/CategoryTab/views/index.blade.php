@@ -1,4 +1,4 @@
-@if(Request::segment(1) == 'info_techtip')
+@if(Request::segment(1) == 'info_techtip' || Request::segment(1) == 'info_sec')
 <div class="intro_use info_techtip">
     <ul class="_oss_tab">
         @foreach ($categoryTabs as $categoryTab)
