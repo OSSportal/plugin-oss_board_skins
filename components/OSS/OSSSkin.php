@@ -8,6 +8,7 @@ use Event;
 use Auth;
 use Gate;
 use XeFrontend;
+use Xpressengine\Plugins\OSS\Components\DynamicFields\SecurityWeak\SecurityWeakType;
 use Xpressengine\Presenter\Presenter;
 use XePresenter;
 use View;
@@ -82,6 +83,13 @@ class OSSSkin extends CommonSkin
             $arrProjectFields[$projectFieldItem->id] = xe_trans($projectFieldItem->word);
         }
         $this->data['arr_project_fields'] = $arrProjectFields;
+
+        $securityFieldConfig = \XeConfig::get(SecurityWeakType::FIELDS_CONFIG_NAME, []);
+        $securityFields = $securityFieldConfig->get('fields', []);
+
+        if (isset($securityFields[$this->data['instanceId']]) === true) {
+            $this->data['security_weak_prefix'] = $securityFields[$this->data['instanceId']];
+        }
 
         // kakaotalk api key for share
         $this->data['kakaotalk_api_key'] = app('config')->get('xe.kakaotalk_api');

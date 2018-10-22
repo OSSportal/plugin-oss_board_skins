@@ -1885,3 +1885,28 @@ right:0;
 .oss-board_list td .check {
   width: 20px;
 }
+
+.severity_critical {
+  background-color: #8B0001;
+  color: #ffffff;
+}
+
+.severity_high {
+  background-color: #BA0005;
+  color: #ffffff;
+}
+
+.severity_medium {
+  background-color: #E66825;
+  color: #000000;
+}
+
+.severity_low {
+  background-color: #FFFF53;
+  color: #000000;
+}
+
+.severity_unknown {
+  background-color: #D0CFD1;
+  color: #000000;
+}
