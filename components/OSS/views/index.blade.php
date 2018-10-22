@@ -415,25 +415,25 @@
                                     <td class="title column-th-title"><a href="{{$urlHandler->getShow($item, Request::all())}}"
                                                                                      id="{{$columnName}}_{{$item->id}}" class="title_text">
                                             {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}</a></td>
-                                    <td class="author">{{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</td>
+                                    <td class="weak_table_td author">{{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</td>
 
                                     @if (isset($item[$security_weak_prefix . '_severity']) == true)
                                         @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] <= 10.0)
-                                            <td class="author severity_critical">Critical</td>
+                                            <td class="weak_table_td author severity_critical">Critical</td>
                                         @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0)
-                                            <td class="author severity_high">High</td>
+                                            <td class="weak_table_td author severity_high">High</td>
                                         @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0)
-                                            <td class="author severity_medium">Medium</td>
+                                            <td class="weak_table_td author severity_medium">Medium</td>
                                         @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1)
-                                            <td class="author severity_low">Low</td>
+                                            <td class="weak_table_td author severity_low">Low</td>
                                         @else
-                                            <td class="author severity_unknown">확인불가</td>
+                                            <td class="weak_table_td author severity_unknown">확인불가</td>
                                         @endif
                                     @else
                                         <td></td>
                                     @endif
 
-                                    <td class="author">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
+                                    <td class="weak_table_td author">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
                                 @endif
                             @else
                                 <td class="xe-hidden-xs column-{{$columnName}}">{!! $fieldType->getSkin()->output($columnName, $item->getAttributes()) !!}</td>
@@ -542,25 +542,25 @@
                                         <td class="title column-th-title"><a href="{{$urlHandler->getShow($item, Request::all())}}"
                                                                              id="{{$columnName}}_{{$item->id}}" class="title_text">
                                                 {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}</a></td>
-                                        <td class="read_num">{{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</td>
+                                        <td class="weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</td>
 
                                         @if (isset($item[$security_weak_prefix . '_severity']) == true)
                                             @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] <= 10.0)
-                                                <td class="read_num severity_critical">Critical</td>
+                                                <td class="weak_table_td read_num severity_critical">Critical</td>
                                             @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0)
-                                                <td class="read_num severity_high">High</td>
+                                                <td class="weak_table_td read_num severity_high">High</td>
                                             @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0)
-                                                <td class="read_num severity_medium">Medium</td>
+                                                <td class="weak_table_td read_num severity_medium">Medium</td>
                                             @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1)
-                                                <td class="read_num severity_low">Low</td>
+                                                <td class="weak_table_td read_num severity_low">Low</td>
                                             @else
-                                                <td class="read_num severity_unknown">확인불가</td>
+                                                <td class="weak_table_td read_num severity_unknown">확인불가</td>
                                             @endif
                                         @else
                                             <td></td>
                                         @endif
 
-                                        <td class="read_num">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
+                                        <td class="weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
                                 @endif
                             @else
                                 <td class="xe-hidden-xs column-{{$columnName}}">{!! $fieldType->getSkin()->output($columnName, $item->getAttributes()) !!}</td>

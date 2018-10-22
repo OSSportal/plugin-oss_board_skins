@@ -1886,6 +1886,10 @@ right:0;
   width: 20px;
 }
 
+.weak_table_td {
+    padding-left: 10px !important;
+}
+
 .severity_critical {
   background-color: #8B0001;
   color: #ffffff;
