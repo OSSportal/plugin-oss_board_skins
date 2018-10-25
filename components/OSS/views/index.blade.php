@@ -439,7 +439,7 @@
 
                                     <td class="xe-hidden-xs weak_table_td author">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
                                     <td class="xe-hidden-xs"><a href="{{$urlHandler->getShow($item, Request::all())}}"
-                                           id="{{$columnName}}_{{$item->id}}" class="title_text">
+                                           id="{{$columnName}}_{{$item->id}}" class="title_text weak_table_td">
                                             <img src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}" width="20px" height="30px">
                                         </a>
                                     </td>
@@ -572,7 +572,7 @@
 
                                         <td class="xe-hidden-xs weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
                                         <td class="xe-hidden-xs"><a href="{{$urlHandler->getShow($item, Request::all())}}"
-                                               id="{{$columnName}}_{{$item->id}}" class="title_text">
+                                               id="{{$columnName}}_{{$item->id}}" class="title_text weak_table_td">
                                                 <img src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}" width="20px" height="30px">
                                             </a>
                                         </td>
