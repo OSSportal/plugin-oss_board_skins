@@ -252,6 +252,23 @@ class OSSSkin extends CommonSkin
                     sprintf('%s@makeWhere', BoardHandler::class),
                     static::class . '-board-makeWhere',
                     function ($func, $query, $request, $config) {
+                        //보안 취약점 필드 검색
+                        if ($request->get('search_target') == 'component_name') {
+                            $query->getProxyManager()->wheres($query->getQuery(), [
+                                'title' => $request->get('search_keyword'),
+                            ]);
+                        }
+                        if ($request->get('search_target') == 'component_version') {
+                            $query->getProxyManager()->wheres($query->getQuery(), [
+                                'version' => $request->get('search_keyword'),
+                            ]);
+                        }
+                        if ($request->get('search_target') == 'weak_id') {
+                            $query->getProxyManager()->wheres($query->getQuery(), [
+                                'weak_id' => $request->get('search_keyword'),
+                            ]);
+                        }
+
                         $query = $func($query, $request, $config);
 
                         if ($request->get('search_target') == 'title') {

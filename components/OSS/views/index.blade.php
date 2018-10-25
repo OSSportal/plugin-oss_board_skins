@@ -312,10 +312,13 @@
                     @else
                         @if (isset($dynamicFieldsById[$columnName]))
                             @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
-                                <th class="title column-th-title" scope="col"><span>컴포넌트 명</span></th>
-                                <th class="title" scope="col"><span>버전</span></th>
+                                <th class="title column-th-title" scope="col"><span>컴포넌트 명 및 버전</span></th>
+                                <th class="title" scope="col"><span>취약점ID</span></th>
                                 <th class="title" scope="col"><span>심각도</span></th>
-                                <th class="title" scope="col"><span>취약점 보고일</span></th>
+                                <th class="title" scope="col">
+                                    <span class="report_span">취약점<br>최종 보고일</span>
+                                </th>
+                                <th class="title" scope="col"><span>대응방안</span></th>
                             @else
                                 <th scope="col" class="column-th-{{$columnName}}">
                                     <span>{{ xe_trans($dynamicFieldsById[$columnName]->get('label')) }}</span></th>
@@ -414,26 +417,32 @@
                                 @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
                                     <td class="title column-th-title"><a href="{{$urlHandler->getShow($item, Request::all())}}"
                                                                                      id="{{$columnName}}_{{$item->id}}" class="title_text">
-                                            {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}</a></td>
-                                    <td class="weak_table_td author">{{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</td>
+                                            {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}
+                                            {{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</a></td>
+                                    <td class="xe-hidden-xs weak_table_td author">{{ isset($item[$security_weak_prefix . '_weak_id']) ? $item[$security_weak_prefix . '_weak_id'] : '' }}</td>
 
                                     @if (isset($item[$security_weak_prefix . '_severity']) == true)
                                         @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] <= 10.0)
-                                            <td class="weak_table_td author severity_critical">Critical</td>
+                                            <td class="xe-hidden-xs weak_table_td author severity_critical">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Critical)</td>
                                         @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0)
-                                            <td class="weak_table_td author severity_high">High</td>
+                                            <td class="xe-hidden-xs weak_table_td author severity_high">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (High)</td>
                                         @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0)
-                                            <td class="weak_table_td author severity_medium">Medium</td>
+                                            <td class="xe-hidden-xs weak_table_td author severity_medium">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Medium)</td>
                                         @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1)
-                                            <td class="weak_table_td author severity_low">Low</td>
+                                            <td class="xe-hidden-xs weak_table_td author severity_low">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Low)</td>
                                         @else
-                                            <td class="weak_table_td author severity_unknown">확인불가</td>
+                                            <td class="xe-hidden-xs weak_table_td author severity_unknown">확인불가</td>
                                         @endif
                                     @else
-                                        <td></td>
+                                        <td class="xe-hidden-xs"></td>
                                     @endif
 
-                                    <td class="weak_table_td author">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
+                                    <td class="xe-hidden-xs weak_table_td author">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
+                                    <td class="xe-hidden-xs"><a href="{{$urlHandler->getShow($item, Request::all())}}"
+                                           id="{{$columnName}}_{{$item->id}}" class="title_text">
+                                            <img src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}" width="20px" height="30px">
+                                        </a>
+                                    </td>
                                 @endif
                             @else
                                 <td class="xe-hidden-xs column-{{$columnName}}">{!! $fieldType->getSkin()->output($columnName, $item->getAttributes()) !!}</td>
@@ -541,26 +550,32 @@
                                 @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
                                         <td class="title column-th-title"><a href="{{$urlHandler->getShow($item, Request::all())}}"
                                                                              id="{{$columnName}}_{{$item->id}}" class="title_text">
-                                                {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}</a></td>
-                                        <td class="weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</td>
+                                                {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}
+                                                {{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</a></td>
+                                        <td class="xe-hidden-xs weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_weak_id']) ? $item[$security_weak_prefix . '_weak_id'] : '' }}</td>
 
                                         @if (isset($item[$security_weak_prefix . '_severity']) == true)
                                             @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] <= 10.0)
-                                                <td class="weak_table_td read_num severity_critical">Critical</td>
+                                                <td class="xe-hidden-xs weak_table_td read_num severity_critical">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Critical)</td>
                                             @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0)
-                                                <td class="weak_table_td read_num severity_high">High</td>
+                                                <td class="xe-hidden-xs weak_table_td read_num severity_high">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (High)</td>
                                             @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0)
-                                                <td class="weak_table_td read_num severity_medium">Medium</td>
+                                                <td class="xe-hidden-xs weak_table_td read_num severity_medium">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Medium)</td>
                                             @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1)
-                                                <td class="weak_table_td read_num severity_low">Low</td>
+                                                <td class="xe-hidden-xs weak_table_td read_num severity_low">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Low)</td>
                                             @else
-                                                <td class="weak_table_td read_num severity_unknown">확인불가</td>
+                                                <td class="xe-hidden-xs weak_table_td read_num severity_unknown">확인불가</td>
                                             @endif
                                         @else
-                                            <td></td>
+                                            <td class="xe-hidden-xs"></td>
                                         @endif
 
-                                        <td class="weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
+                                        <td class="xe-hidden-xs weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
+                                        <td class="xe-hidden-xs"><a href="{{$urlHandler->getShow($item, Request::all())}}"
+                                               id="{{$columnName}}_{{$item->id}}" class="title_text">
+                                                <img src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}" width="20px" height="30px">
+                                            </a>
+                                        </td>
                                 @endif
                             @else
                                 <td class="xe-hidden-xs column-{{$columnName}}">{!! $fieldType->getSkin()->output($columnName, $item->getAttributes()) !!}</td>
@@ -590,27 +605,43 @@
     <div class="bd_search_area_bottom">
         <form method="get" action="{{ $urlHandler->get('index') }}">
             <div class="bd_search_box">
-                <select name="search_target">
-                    <option value="title" @if(Request::get('search_target') == 'title') selected="selected" @endif >제목
-                    </option>
-                    <option value="pure_content"
-                            @if(Request::get('search_target') == 'pure_content') selected="selected" @endif >내용
-                    </option>
-                    <option value="title_pure_content"
-                            @if(Request::get('search_target') == 'title_pure_content') selected="selected" @endif >제목 +
-                        내용
-                    </option>
-                    <option value="writer" @if(Request::get('search_target') == 'writer') selected="selected" @endif >
-                        작성자
-                    </option>
-                </select>
+                @foreach ($skinConfig['listColumns'] as $columnName)
+                    @if (isset($dynamicFieldsById[$columnName]))
+                        @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
+                            {{--보안 취약점 다이나믹 필드를 쓰는 게시판--}}
+                            <select name="search_target">
+                                <option value="component_name" @if(Request::get('search_target') == 'component_name') selected="selected" @endif>컴포넌트명</option>
+                                <option value="component_version" @if(Request::get('search_target') == 'component_version') selected="selected" @endif>버전</option>
+                                <option value="weak_id" @if(Request::get('search_target') == 'weak_id') selected="selected" @endif>취약점 ID</option>
+                            </select>
+                            @break
+                        @endif
+                    @else
+                        {{--일반 게시판--}}
+                        <select name="search_target">
+                            <option value="title" @if(Request::get('search_target') == 'title') selected="selected" @endif >제목
+                            </option>
+                            <option value="pure_content"
+                                    @if(Request::get('search_target') == 'pure_content') selected="selected" @endif >내용
+                            </option>
+                            <option value="title_pure_content"
+                                    @if(Request::get('search_target') == 'title_pure_content') selected="selected" @endif >제목 +
+                                내용
+                            </option>
+                            <option value="writer" @if(Request::get('search_target') == 'writer') selected="selected" @endif >
+                                작성자
+                            </option>
+                        </select>
+                        @break
+                    @endif
+                @endforeach
+
                 <input type="text" name="search_keyword" class="bd_search_input"
                        title="{{ xe_trans('board::boardSearch') }}" placeholder="{{ xe_trans('xe::enterKeyword') }}"
                        value="{{ Request::get('search_keyword') }}">
                 <!-- [D] 클릭시 클래스 on 및 추가 bd_search_detail 영역 활성화 -->
-                <button typoe="submit" class="oss_search_btn">검색</button>
+                <button type="submit" class="oss_search_btn">검색</button>
             </div>
         </form>
     </div>
-
 </div>

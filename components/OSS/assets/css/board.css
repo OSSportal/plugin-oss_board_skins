@@ -1914,3 +1914,7 @@ right:0;
   background-color: #D0CFD1;
   color: #000000;
 }
+
+span.report_span {
+  height: 40px !important;
+}
