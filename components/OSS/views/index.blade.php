@@ -415,7 +415,7 @@
                         @elseif (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null)
                             @if (isset($dynamicFieldsById[$columnName]))
                                 @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
-                                    <td class="title column-th-title"><a href="{{$urlHandler->getShow($item, Request::all())}}"
+                                    <td class="title column-th-title"><a class="weak_table_title" href="{{$urlHandler->getShow($item, Request::all())}}"
                                                                                      id="{{$columnName}}_{{$item->id}}" class="title_text">
                                             {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}
                                             {{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</a></td>
@@ -558,7 +558,7 @@
                         @elseif (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null)
                             @if (isset($dynamicFieldsById[$columnName]))
                                 @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
-                                        <td class="title column-th-title"><a href="{{$urlHandler->getShow($item, Request::all())}}"
+                                        <td class="title column-th-title"><a class="weak_table_title" href="{{$urlHandler->getShow($item, Request::all())}}"
                                                                              id="{{$columnName}}_{{$item->id}}" class="title_text">
                                                 {{ isset($item[$security_weak_prefix . '_title']) ? $item[$security_weak_prefix . '_title'] : '' }}
                                                 {{ isset($item[$security_weak_prefix . '_version']) ? $item[$security_weak_prefix . '_version'] : '' }}</a></td>

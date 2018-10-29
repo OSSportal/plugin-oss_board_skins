@@ -1890,6 +1890,10 @@ right:0;
   padding-left: 10px !important;
 }
 
+.weak_table_title {
+  max-width: 100%;
+}
+
 .weak_icon_td {
   padding: 3px 10px 3px 0 !important;
 }
