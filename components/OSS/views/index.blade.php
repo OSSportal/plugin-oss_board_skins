@@ -314,7 +314,7 @@
                             @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
                                 <th class="title column-th-title" scope="col"><span>컴포넌트 명 및 버전</span></th>
                                 <th class="title" scope="col"><span>취약점ID</span></th>
-                                <th class="title" scope="col"><span>심각도</span></th>
+                                <th class="title non_bottom_border" scope="col"><span>심각도</span></th>
                                 <th class="title" scope="col">
                                     <span class="report_span">취약점<br>최종 보고일</span>
                                 </th>
@@ -422,16 +422,26 @@
                                     <td class="xe-hidden-xs weak_table_td author">{{ isset($item[$security_weak_prefix . '_weak_id']) ? $item[$security_weak_prefix . '_weak_id'] : '' }}</td>
 
                                     @if (isset($item[$security_weak_prefix . '_severity']) == true)
-                                        @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] <= 10.0)
-                                            <td class="xe-hidden-xs weak_table_td author severity_critical">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Critical)</td>
-                                        @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0)
-                                            <td class="xe-hidden-xs weak_table_td author severity_high">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (High)</td>
-                                        @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0)
-                                            <td class="xe-hidden-xs weak_table_td author severity_medium">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Medium)</td>
-                                        @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1)
-                                            <td class="xe-hidden-xs weak_table_td author severity_low">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Low)</td>
+                                        @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] < 11.0)
+                                            <td class="xe-hidden-xs weak_table_td author weak_icon_td">
+                                                <span class="weak_icon severity_critical">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Critical)</span>
+                                            </td>
+                                        @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0 and $item[$security_weak_prefix . '_severity'] < 9.0)
+                                            <td class="xe-hidden-xs weak_table_td author weak_icon_td">
+                                                <span class="weak_icon severity_high">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (High)</span>
+                                            </td>
+                                        @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0 and $item[$security_weak_prefix . '_severity'] < 7.0)
+                                            <td class="xe-hidden-xs weak_table_td author weak_icon_td">
+                                                <span class="weak_icon severity_medium">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Medium)</span>
+                                            </td>
+                                        @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1 and $item[$security_weak_prefix . '_severity'] < 4.0)
+                                            <td class="xe-hidden-xs weak_table_td author weak_icon_td">
+                                                <span class="weak_icon severity_low">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Low)</span>
+                                            </td>
                                         @else
-                                            <td class="xe-hidden-xs weak_table_td author severity_unknown">확인불가</td>
+                                            <td class="xe-hidden-xs weak_table_td author">
+                                                <span class="weak_icon severity_unknown weak_icon_td">확인불가</span>
+                                            </td>
                                         @endif
                                     @else
                                         <td class="xe-hidden-xs"></td>
@@ -440,7 +450,7 @@
                                     <td class="xe-hidden-xs weak_table_td author">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
                                     <td class="xe-hidden-xs"><a href="{{$urlHandler->getShow($item, Request::all())}}"
                                            id="{{$columnName}}_{{$item->id}}" class="title_text weak_table_td">
-                                            <img src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}" width="20px" height="30px">
+                                            <img class="weak_img" src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}">
                                         </a>
                                     </td>
                                 @endif
@@ -555,16 +565,26 @@
                                         <td class="xe-hidden-xs weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_weak_id']) ? $item[$security_weak_prefix . '_weak_id'] : '' }}</td>
 
                                         @if (isset($item[$security_weak_prefix . '_severity']) == true)
-                                            @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] <= 10.0)
-                                                <td class="xe-hidden-xs weak_table_td read_num severity_critical">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Critical)</td>
-                                            @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0)
-                                                <td class="xe-hidden-xs weak_table_td read_num severity_high">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (High)</td>
-                                            @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0)
-                                                <td class="xe-hidden-xs weak_table_td read_num severity_medium">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Medium)</td>
-                                            @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1)
-                                                <td class="xe-hidden-xs weak_table_td read_num severity_low">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Low)</td>
+                                            @if ($item[$security_weak_prefix . '_severity'] >= 9.0 and $item[$security_weak_prefix . '_severity'] < 11.0)
+                                                <td class="xe-hidden-xs weak_table_td read_num weak_icon_td">
+                                                    <span class="weak_icon severity_critical">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Critical)</span>
+                                                </td>
+                                            @elseif ($item[$security_weak_prefix . '_severity'] >= 7.0 and $item[$security_weak_prefix . '_severity'] < 9.0)
+                                                <td class="xe-hidden-xs weak_table_td read_num weak_icon_td">
+                                                    <span class="weak_icon severity_high">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (High)</span>
+                                                </td>
+                                            @elseif ($item[$security_weak_prefix . '_severity'] >= 4.0 and $item[$security_weak_prefix . '_severity'] < 7.0)
+                                                <td class="xe-hidden-xs weak_table_td read_num weak_icon_td">
+                                                    <span class="weak_icon severity_medium">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Medium)</span>
+                                                </td>
+                                            @elseif ($item[$security_weak_prefix . '_severity'] >= 0.1 and $item[$security_weak_prefix . '_severity'] < 4.0)
+                                                <td class="xe-hidden-xs weak_table_td read_num weak_icon_td">
+                                                    <span class="weak_icon severity_low">{{ number_format($item[$security_weak_prefix . '_severity'], 1) }} (Low)</span>
+                                                </td>
                                             @else
-                                                <td class="xe-hidden-xs weak_table_td read_num severity_unknown">확인불가</td>
+                                                <td class="xe-hidden-xs weak_table_td read_num weak_icon_td">
+                                                    <span class="weak_icon severity_unknown">확인불가</span>
+                                                </td>
                                             @endif
                                         @else
                                             <td class="xe-hidden-xs"></td>
@@ -573,7 +593,7 @@
                                         <td class="xe-hidden-xs weak_table_td read_num">{{ isset($item[$security_weak_prefix . '_weak_report_date']) ? $item[$security_weak_prefix . '_weak_report_date'] : '' }}</td>
                                         <td class="xe-hidden-xs"><a href="{{$urlHandler->getShow($item, Request::all())}}"
                                                id="{{$columnName}}_{{$item->id}}" class="title_text weak_table_td">
-                                                <img src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}" width="20px" height="30px">
+                                                <img class="weak_img" src="{{ asset('plugins/oss_board_skins/components/OSS/assets/images/sheet-icon.png') }}">
                                             </a>
                                         </td>
                                 @endif

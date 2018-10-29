@@ -1887,26 +1887,37 @@ right:0;
 }
 
 .weak_table_td {
-    padding-left: 10px !important;
+  padding-left: 10px !important;
+}
+
+.weak_icon_td {
+  padding: 3px 10px 3px 0 !important;
+}
+
+.weak_icon {
+  padding: 7px 10px 7px 10px;
+  display: inline-block;
+  width: 100px;
+  text-align: center;
 }
 
 .severity_critical {
-  background-color: #8B0001;
-  color: #ffffff;
+  background-color: #FC0007;
+  color: #000000;
 }
 
 .severity_high {
-  background-color: #BA0005;
-  color: #ffffff;
+  background-color: #FC4F08;
+  color: #000000;
 }
 
 .severity_medium {
-  background-color: #E66825;
+  background-color: #FFFF0B;
   color: #000000;
 }
 
 .severity_low {
-  background-color: #FFFF53;
+  background-color: #CAEA5D;
   color: #000000;
 }
 
@@ -1917,4 +1928,9 @@ right:0;
 
 span.report_span {
   height: 40px !important;
+}
+
+.weak_table_td .weak_img {
+  width: 15px;
+  height: 23px;
 }
