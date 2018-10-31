@@ -77,13 +77,36 @@
     @endif
 
     <div class="__xe_dynamicfield_group">
-        @foreach ($skinConfig['formColumns'] as $columnName)
-            @if (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null && isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
-                <div class="__xe_{{$columnName}} __xe_section">
-                    {!! $fieldType->getSkin()->show($item->getAttributes()) !!}
-                </div>
+        @if (Request::segment(1) != 'oss_case')
+            @foreach ($skinConfig['formColumns'] as $columnName)
+                @if (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null && isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
+                    <div class="__xe_{{$columnName}} __xe_section">
+                        {!! $fieldType->getSkin()->show($item->getAttributes()) !!}
+                    </div>
+                @endif
+            @endforeach
+        @else
+            {{--공개SW 활용사례 게시판 전용 수정--}}
+            @php ($isBlank = true)
+            @foreach ($skinConfig['formColumns'] as $columnName)
+                @if (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null && isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
+                    @if ($item->getAttributes()[$columnName . '_text'] != null)
+                        @php ($isBlank = false)
+                        @break
+                    @endif
+                @endif
+            @endforeach
+
+            @if ($isBlank == false)
+                @foreach ($skinConfig['formColumns'] as $columnName)
+                    @if (($fieldType = XeDynamicField::get($config->get('documentGroup'), $columnName)) != null && isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
+                        <div class="__xe_{{$columnName}} __xe_section">
+                            {!! $fieldType->getSkin()->show($item->getAttributes()) !!}
+                        </div>
+                    @endif
+                @endforeach
             @endif
-        @endforeach
+        @endif
 
         @foreach ($fieldTypes as $dynamicFieldConfig)
             @if (in_array($dynamicFieldConfig->get('id'), $skinConfig['formColumns']) === false && ($fieldType = XeDynamicField::getByConfig($dynamicFieldConfig)) != null && $dynamicFieldConfig->get('use') == true)
