@@ -307,6 +307,16 @@
                         @endif
                         <th scope="col" class="title column-th-{{$columnName}}">
                             <span>{{ xe_trans('board::title') }}</span></th>
+
+                        {{-- solution profile 적용된 게시판만 제목 뒤에 카테고리명 나오도록 추가 --}}
+                        @foreach($fieldTypes as $typeConfig)
+                            @if ($typeConfig['typeId'] == "fieldType/oss@solution")
+                                @if ($config->get('category') == true)
+                                    <th scope="col" class="column-th-category"><span>분류</span></th>
+                                @endif
+                            @endif
+                        @endforeach
+
                     @elseif ($columnName == 'datahub')
                         <th scope="col" class="column-th-datahub"><span>분야</span></th>
                     @else
@@ -394,6 +404,16 @@
                                                 </div>
                                 --}}
                             </td>
+
+                            {{-- solution profile 적용된 게시판만 제목 뒤에 카테고리명 나오도록 추가 --}}
+                            @foreach($fieldTypes as $typeConfig)
+                                @if ($typeConfig['typeId'] == "fieldType/oss@solution")
+                                    @if ($config->get('category') == true)
+                                        <td class="category xe-hidden-xs column-category">{!! $item->boardCategory !== null ? xe_trans($item->boardCategory->categoryItem->word) : '' !!}</td>
+                                    @endif
+                                @endif
+                            @endforeach
+
                         @elseif ($columnName == 'writer')
                             <td class="author xe-hidden-xs">
                                 @if ($item->hasAuthor())
@@ -538,6 +558,16 @@
                                                                 </div>
                                 --}}
                             </td>
+
+
+                            @foreach($fieldTypes as $typeConfig)
+                                @if ($typeConfig['typeId'] == "fieldType/oss@solution")
+                                    @if ($config->get('category') == true)
+                                        <td class="category xe-hidden-xs column-category">{!! $item->boardCategory !== null ? xe_trans($item->boardCategory->categoryItem->word) : '' !!}</td>
+                                    @endif
+                                @endif
+                            @endforeach
+
                         @elseif ($columnName == 'writer')
                             <td class="author xe-hidden-xs">
                                 @if ($item->hasAuthor())
