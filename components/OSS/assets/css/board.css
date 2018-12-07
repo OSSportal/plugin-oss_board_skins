@@ -63,7 +63,6 @@
 }
 .board label {
   display: table-cell;
-  width: 120px;
   margin: 0;
   font-weight: normal;
 }

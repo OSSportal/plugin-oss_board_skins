@@ -1,5 +1,6 @@
 {{ XeFrontend::rule('board', $rules) }}
-
+{{ XeFrontend::js('assets/core/common/js/draft.js')->appendTo('head')->load() }}
+{{ XeFrontend::css('assets/core/common/css/draft.css')->appendTo('head')->load() }}
 {{ XeFrontend::js('plugins/board/assets/js/BoardTags.js')->appendTo('body')->load() }}
 
 <div class="board_write">
@@ -118,8 +119,16 @@
                 </div>
             </div>
             <div class="write_form_btn @if (Auth::check() === false) nologin @endif">
-                {{--<a href="#" class="bd_btn btn_temp_load __xe_temp_btn_load">임시저장 로드</a>--}}
-                {{--<a href="#" class="bd_btn btn_temp_save __xe_temp_btn_save">임시저장</a>--}}
+                <span class="xe-btn-group">
+                    <button type="button" class="xe-btn xe-btn-secondary __xe_temp_btn_save">{{ xe_trans('xe::draftSave') }}</button>
+                    <button type="button" class="xe-btn xe-btn-secondary xe-dropdown-toggle" data-toggle="xe-dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="xe-sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="xe-dropdown-menu">
+                        <li><a href="#" class="__xe_temp_btn_load">{{ xe_trans('xe::draftLoad') }}</a></li>
+                    </ul>
+                </span>
                 <button type="button" class="bd_btn btn_preview __xe_btn_preview">{{ xe_trans('xe::preview') }}</button>
                 <button type="submit" class="bd_btn btn_submit __xe_btn_submit">{{ xe_trans('xe::submit') }}</button>
             </div>
@@ -127,30 +136,36 @@
     </form>
 </div>
 
-{{--<script type="text/javascript">--}}
-{{--$(function () {--}}
-{{--var form = $('#board_form');--}}
-{{--var draft = $('#xeContentEditor', form).draft({--}}
-{{--key: 'document|' + form.data('instance_id'),--}}
-{{--btnLoad: $('.__xe_temp_btn_load', form),--}}
-{{--btnSave: $('.__xe_temp_btn_save', form),--}}
-{{--container: $('.draft_container', form),--}}
-{{--withForm: true,--}}
-{{--apiUrl: {--}}
-{{--draft: {--}}
-{{--add: xeBaseURL + '/draft/store',--}}
-{{--update: xeBaseURL + '/draft/update',--}}
-{{--delete: xeBaseURL + '/draft/destroy',--}}
-{{--list: xeBaseURL + '/draft',--}}
-{{--},--}}
-{{--auto: {--}}
-{{--set: xeBaseURL + '/draft/setAuto',--}}
-{{--unset: xeBaseURL + '/draft/destroyAuto'--}}
-{{--}--}}
-{{--},--}}
-{{--callback: function (data) {--}}
-{{--XEeditor.getEditor('XEckeditor').editorList['xeContentEditor'].setContents(data.content);--}}
-{{--}--}}
-{{--});--}}
-{{--});--}}
-{{--</script>--}}
+<script type="text/javascript">
+    $(function () {
+        var form = $('#board_form');
+        var draft = $('#xeContentEditor', form).draft({
+            key: 'document|' + form.data('instance_id'),
+            btnLoad: $('.__xe_temp_btn_load', form),
+            btnSave: $('.__xe_temp_btn_save', form),
+            withForm: true,
+            apiUrl: {
+                draft: {
+                    add: xeBaseURL + '/draft/store',
+                    update: xeBaseURL + '/draft/update',
+                    delete: xeBaseURL + '/draft/destroy',
+                    list: xeBaseURL + '/draft',
+                },
+                auto: {
+                    set: xeBaseURL + '/draft/setAuto',
+                    unset: xeBaseURL + '/draft/destroyAuto'
+                }
+            },
+            callback: function (data) {
+                window.XE.app('Editor').then(function (appEditor) {
+                    appEditor.getEditor('XEckeditor').then(function (editorDefine) {
+                        var inst = editorDefine.editorList['xeContentEditor']
+                        if (inst) {
+                            inst.setContents(data.content);
+                        }
+                    })
+                })
+            }
+        });
+    });
+</script>
