@@ -1,7 +1,7 @@
 {{ XeFrontend::rule('board', $rules) }}
-{{ XeFrontend::js('assets/core/common/js/draft.js')->appendTo('head')->load() }}
-{{ XeFrontend::css('assets/core/common/css/draft.css')->appendTo('head')->load() }}
-{{ XeFrontend::js('plugins/board/assets/js/BoardTags.js')->appendTo('body')->load() }}
+{{ XeFrontend::js('assets/core/common/js/draft.js')->load() }}
+{{ XeFrontend::css('assets/core/common/css/draft.css')->load() }}
+{{ XeFrontend::js('plugins/board/assets/js/BoardTags.js')->load() }}
 
 <div class="board_write">
     <form method="post" id="board_form" class="__board_form"

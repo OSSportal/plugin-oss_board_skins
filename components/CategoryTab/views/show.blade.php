@@ -1,8 +1,8 @@
-{{ XeFrontend::js('/assets/vendor/jqueryui/jquery.event.drag-2.2.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.core.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.formatters.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.grid.js')->appendTo('head')->load() }}
-{{ XeFrontend::js('/assets/vendor/slickgrid/slick.dataview.js')->appendTo('head')->load() }}
+{{ XeFrontend::js('/assets/vendor/jqueryui/jquery.event.drag-2.2.js')->load() }}
+{{ XeFrontend::js('/assets/vendor/slickgrid/slick.core.js')->load() }}
+{{ XeFrontend::js('/assets/vendor/slickgrid/slick.formatters.js')->load() }}
+{{ XeFrontend::js('/assets/vendor/slickgrid/slick.grid.js')->load() }}
+{{ XeFrontend::js('/assets/vendor/slickgrid/slick.dataview.js')->load() }}
 {{ XeFrontend::css('/assets/vendor/slickgrid/slick.grid.css')->load() }}
 
 <div class="board_read">

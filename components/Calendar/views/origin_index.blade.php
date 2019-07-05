@@ -1,4 +1,4 @@
-{{ XeFrontend::js('assets/core/xe-ui-component/js/xe-page.js')->appendTo('body')->load() }}
+{{ XeFrontend::js('assets/core/xe-ui-component/js/xe-page.js')->load() }}
 
 <div class="bd_oss">
 <div class="board_header">
