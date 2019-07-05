@@ -385,10 +385,11 @@ class OSSSkin extends CommonSkin
 
             $query = $query->getProxyManager()->get($query->getQuery());
 
-            $query->whereIn('datahub_project_field_id', $categoryIds);
+            $query->whereIn('project_field_id', $categoryIds);
             $query->groupBy('datahub_project_field_id');
+            $query->selectRaw("count('datahub_project_id') as cnt");
 
-            $rows = $query->get(['datahub_project_field_id', new \Illuminate\Database\Query\Expression('count(`datahub_project_field_id`) as cnt')]);
+            $rows = $query->get();
 
             $counts = [];
             foreach ($rows as $row) {
