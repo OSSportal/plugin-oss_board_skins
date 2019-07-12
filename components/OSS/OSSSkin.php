@@ -327,11 +327,13 @@ class OSSSkin extends CommonSkin
             if ($categoryFieldId = \Request::get('category_field_item_id')) {
                 $query = $query->getProxyManager()->get($query->getQuery());
 
-                $query->where('datahub_project_field_id', $categoryFieldId);
+                $query->where('project_field_id', $categoryFieldId);
             }
 
             $query->groupBy('item_id');
-            $rows = $query->get(['item_id', new \Illuminate\Database\Query\Expression('count(`item_id`) as cnt')]);
+            $query->selectRaw("item_id, count('project_id') as cnt");
+
+            $rows = $query->get();
 
             $counts = [];
             foreach ($rows as $row) {
