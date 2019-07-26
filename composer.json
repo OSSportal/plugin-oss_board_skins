@@ -78,6 +78,16 @@
           "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\KossaForeign\\KossaForeignSkin",
           "name": "KOSSA 국내외 연계교육 스킨",
           "description": "KOSSA 국내외 연계교육 스킨"
+        },
+        "module/board@board/skin/oss_board_skins@dtc_notice": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCNotice\\DTCNoticeSkin",
+          "name": "DTC 공지사항 스킨",
+          "description": "DTC 공지사항 스킨"
+        },
+        "module/board@board/skin/oss_board_skins@dtc_qna": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCqna\\DTCqnaSkin",
+          "name": "DTC QnA 스킨",
+          "description": "DTC QnA 스킨"
         }
       }
     }
