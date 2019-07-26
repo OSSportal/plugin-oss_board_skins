@@ -126,6 +126,6 @@
             }
         });
 
-        $('input[name=title]').attr('placeholder', '[성명] 참가신청서 제출합니다.');
+        $('input[name=title]').attr('placeholder', '[대학명] 참여지원서 제출합니다.');
     });
 </script>
