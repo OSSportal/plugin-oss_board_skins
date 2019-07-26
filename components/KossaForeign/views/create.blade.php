@@ -126,6 +126,6 @@
             }
         });
 
-        $('input[name=title]').attr('placeholder', 'placeholder 예시');
+        $('input[name=title]').attr('placeholder', '[대학명] 참여지원서 제출합니다.');
     });
 </script>

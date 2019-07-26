@@ -126,6 +126,6 @@
             }
         });
 
-        $('input[name=title]').attr('placeholder', '[대학명] 2019 대학생 공개SW 체험교육 참여 신청서');
+        $('input[name=title]').attr('placeholder', '[성명] 참가신청서 제출합니다.');
     });
 </script>
