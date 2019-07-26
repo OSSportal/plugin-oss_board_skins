@@ -63,6 +63,21 @@
           "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\OSS\\KakaotalkShareItem",
           "name": "Kakaotalk share toggle menu",
           "description": ""
+        },
+        "module/board@board/skin/oss_board_skins@kossa_university_skin": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\KossaUniversity\\KossaUniversitySkin",
+          "name": "KOSSA 대학교 신청 스킨",
+          "description": "KOSSA 대학교 신청 스킨"
+        },
+        "module/board@board/skin/oss_board_skins@kossa_student_skin": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\KossaStudent\\KossaStudentSkin",
+          "name": "KOSSA 학생 신청",
+          "description": "KOSSA 학생 신청"
+        },
+        "module/board@board/skin/oss_board_skins@kossa_foreign_skin": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\KossaForeign\\KossaForeignSkin",
+          "name": "KOSSA 국내외 연계교육 스킨",
+          "description": "KOSSA 국내외 연계교육 스킨"
         }
       }
     }
