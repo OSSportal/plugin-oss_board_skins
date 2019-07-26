@@ -2,6 +2,7 @@
 {{ XeFrontend::js('assets/core/common/js/draft.js')->load() }}
 {{ XeFrontend::css('assets/core/common/css/draft.css')->load() }}
 {{ XeFrontend::js('plugins/board/assets/js/BoardTags.js')->load() }}
+{{ XeFrontend::css(\Xpressengine\Plugins\OSSBoardSkins\Plugin::asset('components/KossaStudent/assets/css/style.css'))->load() }}
 
 <div class="board_write">
     <form method="post" id="board_form" class="__board_form" action="{{ $urlHandler->get('store') }}"
