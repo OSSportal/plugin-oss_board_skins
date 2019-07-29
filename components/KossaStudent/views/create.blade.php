@@ -23,6 +23,12 @@
             </div>
         </div>
 
+        <p style="display: block; margin: 0 0 20px; color: #ff0000;">
+            ▶ 참가신청 방법 <br/>
+            첨부파일을 다운로드 받안서 작성 후 스캔본(PDF파일)을 첨부해주시기 바랍니다. <br/>
+            - 파일명 : 대학교명_참여지원서_제출일자 예)한국대학교_참여지원서_20190811.pdf
+        </p>
+
         <div class="__xe_dynamicfield_group">
             @foreach ($skinConfig['formColumns'] as $columnName)
                 @if(isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)

@@ -44,6 +44,13 @@
             <a href="{{route('oss::union.downloadKossa', ['fileType' => 'foreign'])}}" style="display: inline-block; margin-left: 10px; border: 1px solid #bbbcbf; padding: 2px 10px; color: #444;">다운로드</a>
         </p>
 
+        <p style="display: block; margin: 0 0 20px; color: #ff0000;">
+            ▶ 참가신청 방법 <br/>
+            '참가기업명'과 '지원자 성명'을 작성 후 첨부파일을 다운로드 받아서 작성 후<br/>
+            스캔본(PDF 파일)을 첨부해주시기 바랍니다.<br/>
+            - 파일명 : 지원자명_참가신청서_제출일자 예)홍길동_참가신청서_20190811.pdf
+        </p>
+
         <div class="write_body">
             <div class="write_form_editor">
                 {!! editor($config->get('boardId'), [
