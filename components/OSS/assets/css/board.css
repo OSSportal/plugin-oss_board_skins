@@ -1725,7 +1725,7 @@
   .write_footer .write_form_btn > button {
     float: left;
     min-width: auto;
-    width: 32%;
+    width: 28%;
     margin-left: 2%;
   }
   .write_footer .write_form_btn.nologin > a {
