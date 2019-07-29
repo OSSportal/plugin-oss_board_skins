@@ -40,7 +40,7 @@
         </div>
 
         <p style="display: block; margin: 0 0 20px; color: #ff0000;">
-            첨부파일 : 참가신청서_재직자 공개SW 국내외 연계교육.hwp
+            첨부파일 : 참여지원서_공개SW체험교육(대학교).hwp
             <a href="{{route('oss::union.downloadKossa', ['fileType' => 'foreign'])}}" style="display: inline-block; margin-left: 10px; border: 1px solid #bbbcbf; padding: 2px 10px; color: #444;">다운로드</a>
         </p>
 
