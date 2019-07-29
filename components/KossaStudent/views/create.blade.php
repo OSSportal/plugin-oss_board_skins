@@ -25,8 +25,10 @@
 
         <p style="display: block; margin: 0 0 20px; color: #ff0000;">
             ▶ 참가신청 방법 <br/>
-            첨부파일을 다운로드 받안서 작성 후 스캔본(PDF파일)을 첨부해주시기 바랍니다. <br/>
-            - 파일명 : 대학교명_참여지원서_제출일자 예)한국대학교_참여지원서_20190811.pdf
+            개최대학, 실습교육 장소는 추후 게시판을 통해 공지할 예정입니다.<br/>
+            튜토리얼은 "대학생 공개SW 체험캠프"중 진행되는 실습형 교육입니다. 본인의 관심분야를 선택해 주세요.<br/>
+            프로젝트별 인원 제한이 있으니 참고하시기 바랍니다.<br/>
+            ※ 인원초과일 경우 다른 프로젝트로 배정될 수 있음
         </p>
 
         <div class="__xe_dynamicfield_group">
@@ -45,11 +47,6 @@
                 @endif
             @endforeach
         </div>
-
-        <p style="display: block; margin: 0 0 20px; color: #ff0000;">
-            첨부파일 : 참여지원서_공개SW체험교육(대학교).hwp
-            <a href="{{route('oss::union.downloadKossa', ['fileType' => 'student'])}}" style="display: inline-block; margin-left: 10px; border: 1px solid #bbbcbf; padding: 2px 10px; color: #444;">다운로드</a>
-        </p>
 
         <div class="write_body">
             <div class="write_form_editor">
