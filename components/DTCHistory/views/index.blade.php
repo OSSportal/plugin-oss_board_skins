@@ -53,6 +53,8 @@
     </div>
 </div>
 
+{{--테스트--}}
+
 <div class="board_footer">
     <!-- PAGINATAION PC-->
 {!! $paginate->render('board::components.Skins.Board.Common.views.default-pagination') !!}
