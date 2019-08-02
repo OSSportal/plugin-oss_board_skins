@@ -98,6 +98,11 @@
           "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCHistory\\DTCHistorySkin",
           "name": "디투씨 역대 컨트리뷰톤 스킨",
           "description": "디투씨 역대 컨트리뷰톤 스킨"
+        },
+        "module/board@board/skin/oss_board_skins@dtc_apply_skin": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCApply\\DTCApplySkin",
+          "name": "디투씨 참가신청",
+          "description": "디투씨 참가신청"
         }
       }
     }
