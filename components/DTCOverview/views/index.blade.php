@@ -1,5 +1,5 @@
 {{ XeFrontend::js('assets/core/xe-ui-component/js/xe-page.js')->appendTo('body')->load() }}
-{{ XeFrontend::css(\Xpressengine\Plugins\OSS\Plugin::asset('components/Skins/Board/DTCOverview/assets/css/style.css'))->load() }}
+{{ XeFrontend::css(\Xpressengine\Plugins\OSSBoardSkins\Plugin::asset('components/DTCOverview/assets/css/style.css'))->load() }}
 
 @if ($isManager === true)
     <div class="board_header">
