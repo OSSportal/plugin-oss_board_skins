@@ -23,22 +23,27 @@
             </div>
         </div>
 
-        <div class="__xe_dynamicfield_group">
-            @foreach ($skinConfig['formColumns'] as $columnName)
-                @if(isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)
-                    <div class="__xe_{{$columnName}} __xe_section">
-                        {!! df_create($config->get('documentGroup'), $columnName, Request::all()) !!}
-                    </div>
-                @endif
-            @endforeach
-            @foreach ($fieldTypes as $dynamicFieldConfig)
-                @if (in_array($dynamicFieldConfig->get('id'), $skinConfig['formColumns']) === false && ($fieldType = XeDynamicField::getByConfig($dynamicFieldConfig)) != null && $dynamicFieldConfig->get('use') == true)
-                    <div class="__xe_{{$dynamicFieldConfig->get('id')}} __xe_section">
-                        {!! df_create($dynamicFieldConfig->get('group'), $dynamicFieldConfig->get('id'), Request::all()) !!}
-                    </div>
-                @endif
-            @endforeach
-        </div>
+{{--        <div class="__xe_dynamicfield_group">--}}
+{{--            @foreach ($skinConfig['formColumns'] as $columnName)--}}
+{{--                @if(isset($dynamicFieldsById[$columnName]) && $dynamicFieldsById[$columnName]->get('use') == true)--}}
+{{--                    <div class="__xe_{{$columnName}} __xe_section">--}}
+{{--                        {!! df_create($config->get('documentGroup'), $columnName, Request::all()) !!}--}}
+{{--                    </div>--}}
+{{--                @endif--}}
+{{--            @endforeach--}}
+{{--            @foreach ($fieldTypes as $dynamicFieldConfig)--}}
+{{--                @if (in_array($dynamicFieldConfig->get('id'), $skinConfig['formColumns']) === false && ($fieldType = XeDynamicField::getByConfig($dynamicFieldConfig)) != null && $dynamicFieldConfig->get('use') == true)--}}
+{{--                    <div class="__xe_{{$dynamicFieldConfig->get('id')}} __xe_section">--}}
+{{--                        {!! df_create($dynamicFieldConfig->get('group'), $dynamicFieldConfig->get('id'), Request::all()) !!}--}}
+{{--                    </div>--}}
+{{--                @endif--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+
+        <p style="display: block; margin: 0 0 20px; color: #ff0000;">
+            참가신청 방법 : 첨부파일을 다운로드 받아서 작성 후 업로드 해주시길 바랍니다.<br/>
+            -파일명 : 1지망 참여희망 프로젝트_제출일자 예)공개SW컨트리뷰톤_190805.doc
+        </p>
 
         <div class="write_body">
             <div class="write_form_editor">
@@ -128,6 +133,6 @@
             }
         });
 
-        // $('input[name=title]').attr('placeholder', '[대학명] 참여지원서 제출합니다.');
+        $('input[name=title]').attr('placeholder', '[프로젝트명] 참가신청서 제출합니다');
     });
 </script>
