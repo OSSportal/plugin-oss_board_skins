@@ -2,8 +2,8 @@
 
 <div class="tab_list_box tab_list_box_menu2" style="margin-bottom: 30px">
     <ul class="tab_list tab_list_type2">
-        <li><a class="tab_link" href="https://oss.kr/contributon_notice">공지사항</a></li>
-        <li class="on"><a class="tab_link" href="https://oss.kr/contributon_qna">Q&amp;A</a></li>
+        <li><a class="tab_link" href="https://oss.kr/contributhon_notice">공지사항</a></li>
+        <li class="on"><a class="tab_link" href="https://oss.kr/contributhon_qna">Q&amp;A</a></li>
     </ul>
 </div>
 
