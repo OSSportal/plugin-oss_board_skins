@@ -1,0 +1,30 @@
+/* --- 탭 개수별 적용 (공통) --- */
+.board_tab_list_box {}
+.board_tab_list_box .board_tab_list {}
+.board_tab_list_box .board_tab_list:after {content: ''; display: block; clear: both}
+.board_tab_list_box .board_tab_list > li {float: left; display: table; width: 100%; margin-bottom: 1px; border-left: 1px solid #fff; background-color: #eceef1}
+.board_tab_list_box .board_tab_list > li.on {}
+.board_tab_list_box .board_tab_list > li.on .board_tab_link {font-weight: 600; text-decoration: none; background-color: #15cfba; color: #fff}
+.board_tab_list_box .board_tab_list .board_tab_link {display: table-cell; height: 65px; font-size: 16px; line-height: 26px; vertical-align: middle; text-align: center}
+.board_tab_list_box .board_tab_list .board_tab_link:hover {background-color: #15cfba; color: #fff; text-decoration: none}
+/* 탭 컬러 */
+.board_tab_list_box.board_tab_list_box_menu1 .board_tab_list > li.on .board_tab_link {background-color: #15cfba}
+.board_tab_list_box.board_tab_list_box_menu1 .board_tab_list .board_tab_link:hover {background-color: #15cfba}
+.board_tab_list_box.board_tab_list_box_menu2 .board_tab_list > li.on .board_tab_link {background-color: #5db4d8}
+.board_tab_list_box.board_tab_list_box_menu2 .board_tab_list .board_tab_link:hover {background-color: #5db4d8}
+.board_tab_list_box.board_tab_list_box_menu3 .board_tab_list > li.on .board_tab_link {background-color: #73d466}
+.board_tab_list_box.board_tab_list_box_menu3 .board_tab_list .board_tab_link:hover {background-color: #73d466}
+.board_tab_list_box.board_tab_list_box_menu4 .board_tab_list > li.on .board_tab_link {background-color: #bda8db}
+.board_tab_list_box.board_tab_list_box_menu4 .board_tab_list .board_tab_link:hover {background-color: #bda8db}
+.board_tab_list_box.board_tab_list_box_menu5 .board_tab_list > li.on .board_tab_link {background-color: #f4d583}
+.board_tab_list_box.board_tab_list_box_menu5 .board_tab_list .board_tab_link:hover {background-color: #f4d583}
+
+/* 2단 ~ 5단까지 */
+.board_tab_list_box .board_tab_list.board_tab_list_type2 > li {width: 50%}
+.board_tab_list_box .board_tab_list.board_tab_list_type2 > li:nth-child(2n + 1) {border-left: 0 none}
+.board_tab_list_box .board_tab_list.board_tab_list_type3 > li {width: 33.33%}
+.board_tab_list_box .board_tab_list.board_tab_list_type3 > li:nth-child(3n + 1) {border-left: 0 none}
+.board_tab_list_box .board_tab_list.board_tab_list_type4 > li {width: 25%}
+.board_tab_list_box .board_tab_list.board_tab_list_type4 > li:nth-child(4n + 1) {border-left: 0 none}
+.board_tab_list_box .board_tab_list.board_tab_list_type5 > li {width: 20%}
+.board_tab_list_box .board_tab_list.board_tab_list_type5 > li:nth-child(5n + 1) {border-left: 0 none}

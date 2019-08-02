@@ -1,0 +1,27 @@
+/* 컨트리뷰톤 프로젝트 소개 게시판 갤러리 리스트 2단 스타일 */
+.board_list.gallery.g_col2--flex > ul > li .cont_area .title {font-size: 16px; color: #344563}
+.board_list.gallery.g_col2--flex > ul > li .cont_area .more_info {margin-top: 0; padding-top: 3px; font-size: 14px; color: rgba(0, 0, 0, 0.58)}
+
+/* mobile only */
+@media (max-width: 768px) {
+
+}
+
+/* tablets */
+@media (min-width: 768px) {
+  /* 컨트리뷰톤 프로젝트 소개 게시판 갤러리 리스트 2단 스타일 */
+  .board_list.gallery.g_col2--flex > ul {display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap;}
+  .board_list.gallery.g_col2--flex > ul > li {-webkit-box-flex: 0; -ms-flex: 0 0 50%; flex: 0 0 50%; width: 50%; margin-bottom: 24px}
+  .board_list.gallery.g_col2--flex > ul > li .thumb_area {width: 96%;}
+  .board_list.gallery.g_col2--flex > ul > li .cont_area {width: 96%; padding-top: 12px}
+}
+
+/* pc */
+@media (min-width: 992px) {
+  
+}
+
+/* pc-wide */
+@media (min-width: 1200px) {
+  
+}

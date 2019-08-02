@@ -88,6 +88,16 @@
           "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCqna\\DTCqnaSkin",
           "name": "DTC QnA 스킨",
           "description": "DTC QnA 스킨"
+        },
+        "module/board@board/skin/oss_board_skins@dtc_overvier_skin": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCOverview\\DTCOverviewSkin",
+          "name": "디투씨 프로젝트 소개 스킨",
+          "description": "디투씨 프로젝트 소개 갤러리 스킨"
+        },
+        "module/board@board/skin/oss_board_skins@dtc_history_skin": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCHistory\\DTCHistorySkin",
+          "name": "디투씨 역대 컨트리뷰톤 스킨",
+          "description": "디투씨 역대 컨트리뷰톤 스킨"
         }
       }
     }
