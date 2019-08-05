@@ -4,6 +4,12 @@
 {{ XeFrontend::js('plugins/board/assets/js/BoardTags.js')->load() }}
 {{ XeFrontend::css(\Xpressengine\Plugins\OSSBoardSkins\Plugin::asset('components/KossaStudent/assets/css/style.css'))->load() }}
 
+@if ($isManager == true)
+    <div class="pull-right" style="padding-bottom: 20px;">
+        <a href="https://oss.kr/student_apply" class="xe-btn xe-btn-danger">신청 목록으로 이동</a>
+    </div>
+@endif
+
 <div class="board_write">
     <form method="post" id="board_form" class="__board_form" action="{{ $urlHandler->get('store') }}"
           enctype="multipart/form-data" data-rule="board" data-rule-alert-type="toast"
