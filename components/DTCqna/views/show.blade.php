@@ -72,6 +72,12 @@
             <span class="mb_time" title="{{$item->created_at}}"><i
                         class="xi-time"></i> <span>{{$item->created_at}}</span></span>
             <span class="mb_readnum"><i class="xi-eye"></i> {{$item->read_count}}</span>
+
+            @if ($item->hasAuthor() && $config->get('anonymity') === false)
+                <p>회원 email : {{$item->user->email}}</p>
+            @else
+                <p>비회원 email : {{$item->email}}</p>
+            @endif
         </div>
     </div>
     {{-- url에 따라 content 출력 위치 변경 --}}
