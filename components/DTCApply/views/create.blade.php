@@ -61,7 +61,7 @@
                         공개SW포털에 회원 가입을 하지 않고 신청이 가능합니다.<br/>
                         비회원으로 신청할 경우 아래 정보를 입력해주세요.<br/>
                         참가 신청 직후 신청 내역 확인 시 아래 정보로 확인 가능합니다.<br/>
-                        신청 내용의 수정을 원하시는 경우 <a href="https://www.oss.kr/contributhon_notice/show/26d90d47-3e73-48cc-8915-c4db61c37a4a" target="_blank">Q&A</a> 게시물을 참고해주세요.
+                        신청 내용의 수정을 원하시는 경우 <a href="https://www.oss.kr/contributhon_qna/show/11e2ddfd-4021-4e33-aac9-a3287b4fe074" target="_blank">FAQ</a> 게시물을 참고해주세요.
                     </p>
 
                     <div class="xe-form-inline">
