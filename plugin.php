@@ -12,6 +12,6 @@ class Plugin extends AbstractPlugin
      */
     public function boot()
     {
-        // implement code
+        //test
     }
 }
