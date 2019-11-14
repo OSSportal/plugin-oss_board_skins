@@ -35,12 +35,12 @@
 }
 .board caption,
 .board legend {
-  visibility: hidden;
-  width: 0;
-  height: 0;
-  font-size: 0;
-  line-height: 0;
+  position: absolute;
   overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  width: 1px;
+  height: 1px;
 }
 .board * {
   -webkit-box-sizing: border-box;
