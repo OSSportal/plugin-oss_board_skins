@@ -76,7 +76,7 @@
 
 <!-- 댓글 -->
 @if ($config->get('comment') === true && $item->boardData->allow_comment === 1)
-    <div class="__xe_comment board_comment">
+    <div class="__xe_comment board_comment oss_board_comment">
         {!! uio('comment', ['target' => $item]) !!}
     </div>
 @endif
