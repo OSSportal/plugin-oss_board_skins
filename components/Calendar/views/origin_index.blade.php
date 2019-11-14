@@ -443,7 +443,7 @@
                 <form method="get" action="{{ $urlHandler->get('index') }}">
 		<input type="hidden" name="listStyle" value="list" />
                     <div class="bd_search_box">
-			<select name="search_target">
+			<select name="search_target" title="게시물 검색항목 옵션 선택(제목, 내용, 제목 + 내용, 작성자)">
                 <option value="">검색 항목</option>
 <option value="title" @if(Request::get('search_target') == 'title') selected="selected" @endif >제목</option>
 <option value="pure_content" @if(Request::get('search_target') == 'pure_content') selected="selected" @endif >내용</option>
