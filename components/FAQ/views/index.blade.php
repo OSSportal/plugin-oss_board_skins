@@ -1,5 +1,6 @@
 <style>
     .intro_faq .faq-list img {max-width: 100%;}
+    .intro_faq .btn-faq__board-update {float: none; display: inline-block; width: 140px; height: 40px; margin-left: 8px; padding: 5px 0; font-size: 14px; vertical-align: top; text-align: center; color: #000;}
 </style>
 <div class="intro_faq">
 
@@ -27,11 +28,12 @@
             </a>
             <div class="faq-content" style="display:none;">
                 {!! compile($item->instance_id, $item->content, $item->format === Xpressengine\Plugins\Board\Models\Board::FORMAT_HTML) !!}
-                <span class="btn btn-fold"><button>접기</button></span>
-
-                @if ($createPermission)
-                    <a href="{{ $urlHandler->get('edit', ['id' => $item->id]) }}">수정하기</a>
-                @endif
+                <span class="btn btn-fold">
+                    <button>접기</button>
+                    @if ($createPermission)
+                        <a href="{{ $urlHandler->get('edit', ['id' => $item->id]) }}" class="btn-faq__board-update">수정하기</a>
+                    @endif
+                </span>
             </div>
         </li>
         @endforeach
