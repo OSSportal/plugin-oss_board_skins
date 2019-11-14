@@ -660,6 +660,7 @@
                         @if ($dynamicFieldsById[$columnName]['typeId'] == "fieldType/oss@security_weak")
                             {{--보안 취약점 다이나믹 필드를 쓰는 게시판--}}
                             <select name="search_target">
+                                <option value="">검색 항목</option>
                                 <option value="component_name" @if(Request::get('search_target') == 'component_name') selected="selected" @endif>컴포넌트명</option>
                                 <option value="component_version" @if(Request::get('search_target') == 'component_version') selected="selected" @endif>버전</option>
                                 <option value="weak_id" @if(Request::get('search_target') == 'weak_id') selected="selected" @endif>취약점 ID</option>
@@ -669,6 +670,7 @@
                     @else
                         {{--일반 게시판--}}
                         <select name="search_target">
+                            <option value="">검색 항목</option>
                             <option value="title" @if(Request::get('search_target') == 'title') selected="selected" @endif >제목
                             </option>
                             <option value="pure_content"

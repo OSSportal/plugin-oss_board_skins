@@ -441,9 +441,10 @@
 
 <div class="bd_search_area_bottom">
                 <form method="get" action="{{ $urlHandler->get('index') }}">
-		<input type="hidden" name="listStyle" value="list" /> 
+		<input type="hidden" name="listStyle" value="list" />
                     <div class="bd_search_box">
 			<select name="search_target">
+                <option value="">검색 항목</option>
 <option value="title" @if(Request::get('search_target') == 'title') selected="selected" @endif >제목</option>
 <option value="pure_content" @if(Request::get('search_target') == 'pure_content') selected="selected" @endif >내용</option>
 <option value="title_pure_content" @if(Request::get('search_target') == 'title_pure_content') selected="selected" @endif >제목 + 내용</option>
