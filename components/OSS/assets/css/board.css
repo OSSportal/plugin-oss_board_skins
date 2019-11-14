@@ -1937,3 +1937,13 @@ span.report_span {
   width: 15px;
   height: 23px;
 }
+
+.oss_board_comment .comment_form_option label {
+  display: inline-block;
+  vertical-align: -2px;
+}
+
+.oss_board_comment .comment_form_controller .comment_form_btn .btn_submit {
+  padding-top: 0;
+  padding-bottom: 0;
+}
