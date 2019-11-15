@@ -150,6 +150,12 @@ class OSSSkin extends CommonSkin
                     static::$path = self::$path;
                 }
         */
+
+        $instanceConfig = InstanceConfig::instance();
+        $menuItem = $instanceConfig->getMenuItem();
+
+        $this->data['menuTitle'] = xe_trans($menuItem['title']);
+
         $contentView = $this->render2();
 
         /**

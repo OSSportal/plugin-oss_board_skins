@@ -267,7 +267,11 @@
     </div>
 
     <div class="oss-board_list board_list">
-        <table>
+        <table summary="{{$menuTitle}} 게시물 리스트 표">
+            <caption>
+                <span class="blind">{{$menuTitle}} 게시물 리스트 표</span>
+            </caption>
+
             <!-- [D] 모바일뷰에서 숨겨할 요소 클래스 xe-hidden-xs 추가 -->
             <thead class="xe-hidden-xs">
             <!-- LIST HEADER -->
