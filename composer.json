@@ -103,6 +103,11 @@
           "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\DTCApply\\DTCApplySkin",
           "name": "디투씨 참가신청",
           "description": "디투씨 참가신청"
+        },
+        "module/board@board/skin/oss_board_skins@oss_menu_tab": {
+          "class": "Xpressengine\\Plugins\\OSSBoardSkins\\Components\\OSSMenuTab\\OSSMenuTab",
+          "name": "OSS Menu tab 스킨",
+          "description": "같은 depth에 있는 메뉴를 tab으로 출력하는 스킨"
         }
       }
     }
