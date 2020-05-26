@@ -2,9 +2,9 @@
 
 namespace Xpressengine\Plugins\OSSBoardSkins\Components\DTCHistory;
 
-use Xpressengine\Plugins\OSSBoardSkins\Components\OSS\OSSSkin;
+use Xpressengine\Plugins\Board\Components\Skins\Board\Common\CommonSkin;
 
-class DTCHistorySkin extends OSSSkin
+class DTCHistorySkin extends CommonSkin
 {
     protected static $path = 'oss_board_skins/components/DTCHistory';
 }
