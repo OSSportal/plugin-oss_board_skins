@@ -82,11 +82,6 @@
 @endif
 <!-- // 댓글 -->
 
-@if (isset($withoutList) === false || $withoutList === false)
-    <!-- 리스트 -->
-    @include($_skinPath.'/views/index')
-@endif
-
 
 <style>
     .xe-dynamicField label {
