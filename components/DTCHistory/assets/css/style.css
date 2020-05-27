@@ -10,8 +10,8 @@
 /* 탭 컬러 */
 .board_tab_list_box.board_tab_list_box_menu1 .board_tab_list > li.on .board_tab_link {background-color: #15cfba}
 .board_tab_list_box.board_tab_list_box_menu1 .board_tab_list .board_tab_link:hover {background-color: #15cfba}
-.board_tab_list_box.board_tab_list_box_menu2 .board_tab_list > li.on .board_tab_link {background-color: #5db4d8}
-.board_tab_list_box.board_tab_list_box_menu2 .board_tab_list .board_tab_link:hover {background-color: #5db4d8}
+.board_tab_list_box.board_tab_list_box_menu2 .board_tab_list > li.on .board_tab_link {background-color: #1976d2}
+.board_tab_list_box.board_tab_list_box_menu2 .board_tab_list .board_tab_link:hover {background-color: #1976d2}
 .board_tab_list_box.board_tab_list_box_menu3 .board_tab_list > li.on .board_tab_link {background-color: #73d466}
 .board_tab_list_box.board_tab_list_box_menu3 .board_tab_list .board_tab_link:hover {background-color: #73d466}
 .board_tab_list_box.board_tab_list_box_menu4 .board_tab_list > li.on .board_tab_link {background-color: #bda8db}
