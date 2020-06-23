@@ -67,7 +67,7 @@
                         <input type="text" name="writer" class="xe-form-control"
                                placeholder="{{ xe_trans('xe::writer') }}" title="{{ xe_trans('xe::writer') }}"
                                value="{{ Request::old('writer') }}">
-                        <input type="password" name="certify_key" class="xe-form-control"
+                        <input type="password" autocomplete=”off” autocomplete=”off” name="certify_key" class="xe-form-control"
                                placeholder="{{ xe_trans('xe::password') }}" title="{{ xe_trans('xe::password') }}">
                         <input type="email" name="email" class="xe-form-control"
                                placeholder="{{ xe_trans('xe::email') }}" title="{{ xe_trans('xe::email') }}"
