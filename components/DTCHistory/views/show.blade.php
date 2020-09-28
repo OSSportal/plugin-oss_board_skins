@@ -1,3 +1,5 @@
+{!! xe_trans($config->get('topViewContent', '')) !!}
+
 <div class="board_read">
     @foreach ($skinConfig['formColumns'] as $columnName)
         @if($columnName === 'title')
@@ -82,6 +84,7 @@
 @endif
 <!-- // 댓글 -->
 
+{!! xe_trans($config->get('bottomViewContent', '')) !!}
 
 <style>
     .xe-dynamicField label {

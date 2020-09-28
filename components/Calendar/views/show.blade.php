@@ -5,6 +5,8 @@
 {{ XeFrontend::js('/assets/core/xe-ui-component/slickgrid/slick.dataview.js')->load() }}
 {{ XeFrontend::css('/assets/core/xe-ui-component/slickgrid/slick.grid.css')->load() }}
 
+{!! xe_trans($config->get('topViewContent', '')) !!}
+
     <div class="board_read">
                 <div class="read_header">
                     @if($item->status == $item::STATUS_NOTICE)
@@ -123,6 +125,8 @@
     </div>
     @endif
     <!-- // 댓글 -->
+
+{!! xe_trans($config->get('bottomViewContent', '')) !!}
 
 @if (isset($withoutList) === false || $withoutList === false)
     <!-- 리스트 -->
