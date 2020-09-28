@@ -86,7 +86,7 @@ class OSSSkin extends CommonSkin
 
         $securityFieldConfig = \XeConfig::get(SecurityWeakType::FIELDS_CONFIG_NAME, []);
         $securityFields = $securityFieldConfig->get('fields', []);
-
+		
         if (isset($securityFields[$this->data['instanceId']]) === true) {
             $this->data['security_weak_prefix'] = $securityFields[$this->data['instanceId']];
         }
@@ -116,6 +116,12 @@ class OSSSkin extends CommonSkin
                         'text' => '_custom_::' . sprintf('%s (%s)', xe_trans($item['text']), $item['count']),
                     ];
                 }
+            }
+		
+			// set title head count
+			$titleHeadItems = $this->data['titleHeadItems'];
+			if (count($titleHeadItems) > 0) {
+                $this->data['titleHeadItems'] = $this->getTitleHeadItems($titleHeadItems);
             }
         }
 
@@ -261,17 +267,17 @@ class OSSSkin extends CommonSkin
                         //보안 취약점 필드 검색
                         if ($request->get('search_target') == 'component_name') {
                             $query->getProxyManager()->wheres($query->getQuery(), [
-                                'title' => $request->get('search_keyword'),
+                                'security_title' => ["%".$request->get('search_keyword')."%", 'like'],
                             ]);
                         }
                         if ($request->get('search_target') == 'component_version') {
                             $query->getProxyManager()->wheres($query->getQuery(), [
-                                'version' => $request->get('search_keyword'),
+                                'security_version' => $request->get('search_keyword'),
                             ]);
                         }
                         if ($request->get('search_target') == 'weak_id') {
                             $query->getProxyManager()->wheres($query->getQuery(), [
-                                'weak_id' => $request->get('search_keyword'),
+                                'security_weak_id' => $request->get('search_keyword'),
                             ]);
                         }
 
@@ -422,4 +428,57 @@ class OSSSkin extends CommonSkin
 
         return $items;
     }
+	
+	/**
+	* add title_head document item countn
+	*/
+	protected function getTitleHeadItems($titleHeadItems)
+	{
+		$configHandler = app('xe.board.config');
+        $config = $configHandler->get($this->data['instanceId']);
+		$datas = [];
+		if ($config->get('useTitleHead') === true) {
+			$model = Board::division($this->data['instanceId']);
+            $query = $model->where('instance_id', $this->data['instanceId'])->visible();
+
+			if ($categoryId = \Request::get('category_item_id')) {
+                $query->leftJoin(
+                    'board_category',
+                    sprintf('%s.%s', $query->getQuery()->from, 'id'),
+                    '=',
+                    sprintf('%s.%s', 'board_category', 'target_id')
+                );
+
+                $query->where('item_id', $categoryId);
+            }
+			
+            $query->leftJoin(
+				'board_data',
+				sprintf('%s.%s', $query->getQuery()->from, 'id'),
+				'=',
+				sprintf('%s.%s', 'board_data', 'target_id')
+			);
+
+            $query->groupBy('board_data.title_head');
+            $query->selectRaw("count('xe_board_data.title_head') as cnt, xe_board_data.title_head");
+
+            $rows = $query->get();
+			foreach ($rows as $row) {
+				$datas[$row['title_head']] = $row['cnt'];
+			}
+		}
+		
+		foreach ($titleHeadItems as $index => $titleHeadItem) {
+			$cnt = 0;
+			if (isset($datas[$titleHeadItem['value']])) {
+				$cnt = $datas[$titleHeadItem['value']];
+			}
+			$titleHeadItems[$index] = [
+				'value' => $titleHeadItem['value'],
+				'text' => sprintf("%s (%s)", $titleHeadItem['text'], $cnt),
+			];
+		}
+		
+		return $titleHeadItems;
+	}
 }

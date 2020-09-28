@@ -67,6 +67,15 @@
                 @endif
             @endif
 
+			@if($config->get('useTitleHead') == true)
+			{!! uio('uiobject/board@select', [
+					'name' => 'title_head',
+					'label' => xe_trans('board::titleHead'),
+					'value' => Request::get('title_head'),
+					'items' => $titleHeadItems,
+					]) !!}
+			@endif
+		
             {!! uio('uiobject/board@select', [
                 'name' => 'order_type',
                 'label' => '_custom_::' . xe_trans('xe::order'),
@@ -191,6 +200,8 @@
                                     </div>
                                 </div>
                             @endif
+						</div>
+						<div class="xe-row">
                             <div class="xe-col-sm-6">
                                 <div class="xe-row">
                                     <div class="xe-col-sm-3">
@@ -203,6 +214,23 @@
                                     </div>
                                 </div>
                             </div>
+							@if($config->get('useTitleHead') == true)
+								<div class="xe-col-sm-6">
+									<div class="xe-row">
+										<div class="xe-col-sm-3">
+											<label class="xe-control-label">{{ xe_trans('board::titleHead') }}</label>
+										</div>
+										<div class="xe-col-sm-9">
+											{!! uio('uiobject/board@select', [
+											'name' => 'title_head',
+											'label' => xe_trans('board::titleHead'),
+											'value' => Request::get('title_head'),
+											'items' => $titleHeadItems,
+											]) !!}
+										</div>
+									</div>
+								</div>
+							@endif
                         </div>
                         <div class="xe-row">
                             <div class="xe-col-sm-6">
@@ -388,7 +416,7 @@
                                                 class="xe-sr-only">secret</span></span>
                                 @endif
                                 <a href="{{$urlHandler->getShow($item, Request::all())}}"
-                                   id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
+                                   id="{{$columnName}}_{{$item->id}}" class="title_text">@if ($item->data->title_head != '')<span class="title-head title-head-{{$item->data->title_head}}">[{{$item->data->title_head}}]</span>@endif{!! $item->title !!}</a>
                                 @if($item->comment_count > 0)
                                     <a href="{{$urlHandler->getShow($item, Request::all())}}#comment"
                                        class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>
@@ -542,7 +570,7 @@
                                                 class="xe-sr-only">secret</span></span>
                                 @endif
                                 <a href="{{$urlHandler->getShow($item, Request::all())}}"
-                                   id="{{$columnName}}_{{$item->id}}" class="title_text">{!! $item->title !!}</a>
+                                   id="{{$columnName}}_{{$item->id}}" class="title_text">@if ($item->data->title_head != '')<span class="title-head title-head-{{$item->data->title_head}}">[{{$item->data->title_head}}]</span>@endif{!! $item->title !!}</a>
                                 @if($item->comment_count > 0)
                                     <a href="{{$urlHandler->getShow($item, Request::all())}}#comment"
                                        class="reply_num xe-hidden-xs" title="Replies">{{ $item->comment_count }}</a>

@@ -13,5 +13,33 @@ class Plugin extends AbstractPlugin
     public function boot()
     {
         //test
+		intercept(
+			\Xpressengine\Plugins\Board\Validator::class . '@getCreateRule', 
+			'oss.board-getCreateRule', 
+			function ($func, $user, $config, $rules = null) {
+				if ($config->get('useTitleHead', false) == true) {
+					$rules = [
+						'title_head' => 'required'
+					];
+				}
+				$result = $func($user, $config, $rules);
+				return $result;
+			}
+		);
+		
+		intercept(
+			\Xpressengine\Plugins\Board\Validator::class . '@getEditRule', 
+			'oss.board-getEditRule', 
+			function ($func, $user, $config, $rules = null) {
+				if ($config->get('useTitleHead', false) == true) {
+					$rules = [
+						'title_head' => 'required'
+					];
+				}
+				$result = $func($user, $config, $rules);
+				return $result;
+			}
+		);
+		
     }
 }

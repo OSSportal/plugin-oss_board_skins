@@ -56,7 +56,7 @@
                     @break
                 @endif
             @else
-                <h1><a href="{{ $urlHandler->getShow($item) }}">{!! $item->title !!}</a></h1>
+                <h1><a href="{{ $urlHandler->getShow($item) }}">@if ($item->data->title_head != '')<span class="title-head title-head-{{$item->data->title_head}}">[{{$item->data->title_head}}]</span>@endif{!! $item->title !!}</a></h1>
                 @break
             @endif
         @endforeach
