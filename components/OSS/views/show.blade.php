@@ -24,6 +24,8 @@
     ")->load() }}
 @endif
 
+{!! xe_trans($config->get('topViewContent', '')) !!}
+
 <div class="board_read">
     <div class="read_header">
         @if(false == in_array(Request::segment(1), ['dev_support_activities', 'dev_competition_activities', 'kosslab_project']) && false)
@@ -213,6 +215,8 @@
     </div>
 @endif
 <!-- // 댓글 -->
+
+{!! xe_trans($config->get('bottomViewContent', '')) !!}
 
 @if (isset($withoutList) === false || $withoutList === false)
     <!-- 리스트 -->

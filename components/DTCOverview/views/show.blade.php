@@ -1,3 +1,5 @@
+{!! xe_trans($config->get('topViewContent', '')) !!}
+
 <div class="board_read">
     @foreach ($skinConfig['formColumns'] as $columnName)
         @if($columnName === 'title')
@@ -81,6 +83,8 @@
     </div>
 @endif
 <!-- // 댓글 -->
+
+{!! xe_trans($config->get('bottomViewContent', '')) !!}
 
 @if (isset($withoutList) === false || $withoutList === false)
     <!-- 리스트 -->

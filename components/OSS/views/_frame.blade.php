@@ -10,8 +10,20 @@ use Xpressengine\Plugins\OSSBoardSkins\Components\OSS\OSSSkin;
 
 <!-- BOARD -->
 <div class="board">
+    @if ($config->get('topCommonContentOnlyList') === true)
+        <div class="xe-list-board-header__text">
+            {!! xe_trans($config->get('topCommonContent', '')) !!}
+        </div>
+    @endif
+    
     @section('content')
         {!! isset($content) ? $content : '' !!}
     @show
+
+    @if ($config->get('bottomCommonContentOnlyList') === true)
+        <div class="xe-list-board-footer__text">
+            {!! xe_trans($config->get('bottomCommonContent', '')) !!}
+        </div>
+    @endif
 </div>
 <!-- /BOARD -->

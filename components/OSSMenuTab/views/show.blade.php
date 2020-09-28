@@ -24,6 +24,8 @@
     ")->load() }}
 @endif
 
+{!! xe_trans($config->get('topViewContent', '')) !!}
+
 @if ($siblingMenus->count() > 1)
     <div class="tab_list_box tab_list_box_menu2" style="margin-bottom: 30px">
         <ul class="tab_list tab_list_type2">
@@ -222,6 +224,8 @@
     </div>
 @endif
 <!-- // 댓글 -->
+
+{!! xe_trans($config->get('bottomViewContent', '')) !!}
 
 {{--@if (isset($withoutList) === false || $withoutList === false)--}}
 {{--    <!-- 리스트 -->--}}
